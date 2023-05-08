@@ -18,7 +18,7 @@ Landing Page | Infinity Squad.
 
 - [@ViniciusCuest](https://github.com/ViniciusCuest)
 - [@Elias]
-- [@João Jesus]
+- [@João Jesus](https://github.com/jpfcordeiro)
 - [@Kaio]
 
 ## License
