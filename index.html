@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html id="html" lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap"
+      rel="stylesheet">
+   <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+   <link rel="stylesheet" href="./styles/index.css">
+   <title>Infinity • Landing</title>
+</head>
+
+<body>
+   <main class="wrapper">
+      <header class="header">
+         <h1 class="logo">Infinity</h1>
+         <nav class="navigation">
+            <ul class="list-navigator">
+               <li class="active">Home</li>
+               <li>Projects</li>
+               <li>Blog</li>
+               <li>Contact Us</li>
+            </ul>
+            <button id="mode" class="switch-theme">
+               <span id="icon-mode" class="material-symbols-rounded"></span>
+            </button>
+         </nav>
+      </header>
+      <main class="content">
+         <section>
+            <h1 class="heading">Each challenge has a
+               <span class="heading-gradient"><br>new solution<span>
+            </h1>
+            <p class="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+         </section>
+
+         <img class="image" src="./src/iphone.png" alt="image">
+      </main>
+      <span class="light"></span>
+   </main>
+</body>
+<script type="text/javascript">
+   const html = document.getElementById("html");
+   const icon = document.getElementById("icon-mode");
+   window.addEventListener("load", () => {
+      const mode = localStorage.getItem("mode");
+      if (mode === "dark") {
+         html.classList.add("dark");
+         icon.innerHTML = 'dark_mode';
+         return;
+      }
+      icon.innerHTML = 'light_mode';
+   });
+   window.removeEventListener("load", () => { return; });
+</script>
+<script type="text/javascript" src="./js/index.js"></script>
+
+</html>
