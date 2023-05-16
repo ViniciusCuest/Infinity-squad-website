@@ -2,6 +2,7 @@
    --body-bg: #fff;
    --text: #000;
    --text-gradient: linear-gradient(90deg, #000000d9 0%, rgba(115, 152, 247, 0.907943) 21.07%, rgba(12, 76, 241, 0.84) 85.86%);
+   --header-gradient: linear-gradient(var(--body-bg));
 }
 
 .dark:root {
@@ -9,6 +10,7 @@
    --light: #4B90D0;
    --text: #fff;
    --text-gradient: linear-gradient(90deg, #ffffff 0%, rgba(115, 152, 247, 0.907943) 21.07%, rgba(12, 76, 241, 0.84) 85.86%);
+   --header-gradient: linear-gradient(180deg, #000 15%, rgba(0, 115, 255, 0.003) 85%, rgba(0, 0, 0, 0) 100%);
 }
 
 * {
@@ -75,7 +77,7 @@ button {
 
 .header.active {
    animation: headerActive 1s ease-in;
-   background: linear-gradient(180deg, #000 15%, rgba(0, 115, 255, 0.003) 90%, rgba(0, 0, 0, 0) 100%);
+   background: var(--header-gradient)
 }
 
 .hamburguer {
