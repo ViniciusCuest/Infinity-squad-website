@@ -15,16 +15,25 @@
    <title>Infinity • Landing</title>
 </head>
 
-<body>
+<body id="body">
+   <!-- Home -->
    <main class="wrapper">
       <header class="header">
          <h1 class="logo">Infinity</h1>
          <nav class="navigation">
-            <ul class="list-navigator">
-               <li class="active">Home</li>
-               <li>Projects</li>
-               <li>Blog</li>
-               <li>Contact Us</li>
+            <ul id="list" class="list-navigator">
+               <li id="0" class="active" onclick="changeIndex(event);">
+                  Home
+               </li>
+               <li id="1" class="" onclick="changeIndex(event);">
+                  Projects
+               </li>
+               <li id="2" class=""  onclick="changeIndex(event);">
+                  Blog
+               </li>
+               <li id="3" class="" onclick="changeIndex(event);">
+                  Contact Us
+               </li>
             </ul>
             <button id="mode" class="switch-theme">
                <span id="icon-mode" class="material-symbols-rounded"></span>
@@ -34,30 +43,77 @@
       <main class="content">
          <section>
             <h1 class="heading">Each challenge has a
-               <span class="heading-gradient"><br>new solution<span>
+               <span class="heading-gradient"><br id="web">new solution<span>
             </h1>
-            <p class="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+            <p class="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
+               Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+               galley of type and scrambled it to make a type specimen book</p>
          </section>
 
          <img class="image" src="./src/iphone.png" alt="image">
       </main>
       <span class="light"></span>
    </main>
+   <!-- Projecs -->
+   <main class="wrapper">
+      <main class="content">
+         <section>
+            <h1 class="heading">Description Projects</h1>
+            <p class="description">Na era da Inovação 2.0, avanços teóricos e novas invenções baseadas em tecnologias
+               básicas ajudarão a enfrentar desafios globais, apoiando nossa visão e suposições para o futuro. À medida
+               que entramos nessa nova era, a Huawei aumentará ainda mais o investimento em inovação, levando a inovação
+               para o próximo nível e fornecendo, constantemente, valor ao setor e à sociedade em geral. Continuaremos
+               trabalhando para construir um mundo totalmente conectado e inteligente, beneficiando assim mais pessoas,
+               lares e organizações.</p>
+         </section>
+
+         <img class="image" id="last-image" src="./src/iphone2.png" alt="image">
+      </main>
+      <span class="light"></span>
+   </main>
+   <!-- Blog -->
+   <main class="wrapper">
+      <main class="content">
+         <section>
+            <h1 class="heading">Squad</h1>
+            <p class="description"></p>
+            <section class="squad-container">
+               <div class="squad-content">
+                  <div class="profile"></div>
+                  <h1 class="profile-name">Elias</h1>
+               </div>
+               <div class="squad-content">
+      
+               </div>
+               <div class="squad-content">
+      
+               </div>
+               <div class="squad-content">
+      
+               </div>
+            </section>
+         </section>
+      </main>
+      <span class="light"></span>
+   </main>
+   <!-- Contact us -->
+   <main class="wrapper">
+      <main class="content" id="last-content">
+         <section>
+            <h1 class="heading">Contact us</h1>
+            <p class="description"></p>
+         </section>
+         <form class="form">
+            <input class="input-box" type="text">
+            <input class="input-box" type="text">
+            <input class="input-box" type="text">
+            <textarea class="input-area" name="" id="" cols="30" rows="10"></textarea>
+            <button class="submit">Submit</button>
+         </form>
+      </main>
+      <span class="light"></span>
+   </main>
 </body>
-<script type="text/javascript">
-   const html = document.getElementById("html");
-   const icon = document.getElementById("icon-mode");
-   window.addEventListener("load", () => {
-      const mode = localStorage.getItem("mode");
-      if (mode === "dark") {
-         html.classList.add("dark");
-         icon.innerHTML = 'dark_mode';
-         return;
-      }
-      icon.innerHTML = 'light_mode';
-   });
-   window.removeEventListener("load", () => { return; });
-</script>
 <script type="text/javascript" src="./js/index.js"></script>
 
 </html>
