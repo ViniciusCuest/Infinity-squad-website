@@ -21,7 +21,7 @@ body {
    padding: 0;
    margin: 0;
    font-size: 16px;
-   background: var(--body-bg)
+   background: var(--body-bg);
 }
 
 a,
@@ -66,9 +66,16 @@ button {
    flex-direction: row;
    align-items: center;
    justify-content: space-between;
+   border-bottom-left-radius: 25px;
+   border-bottom-right-radius: 25px;
    width: 100%;
-   padding: .5em 3.75em;
-   z-index: 10;
+   padding: .4em 3.75em;
+   z-index: 50;
+}
+
+.header.active {
+   animation: headerActive 1s ease-in;
+   background: linear-gradient(180deg, #000 15%, rgba(0, 115, 255, 0.003) 90%, rgba(0, 0, 0, 0) 100%);
 }
 
 .hamburguer {
@@ -113,26 +120,30 @@ button {
    cursor: pointer;
 }
 
-.switch-theme span {
-   font-size: 2.5rem;
-   color: var(--text);
+.switch-theme svg {
+   width: 1.5rem;
+   fill: var(--text);
+   animation: icon-animation 150ms linear;
 }
 
 .content {
    display: flex;
    flex-direction: row;
    justify-content: space-between;
-   margin-top: calc(6.8rem + 5vh);
    height: auto;
    width: 100%;
    padding: .5em 3.75em;
 }
 
+.content>#cover-info {
+   margin-top: 6.8rem;
+}
+
 .heading {
-   font-size: 55px;
+   font-size: 2.8rem;
    font-weight: 900;
    color: var(--text);
-   margin-top: 10.5rem;
+   margin-top: 12rem;
 }
 
 .description {
@@ -144,7 +155,7 @@ button {
 
 .image {
    margin-top: -30px;
-   width: 50%;
+   width: 35%;
    z-index: 5;
    object-fit: contain;
 }
@@ -164,13 +175,18 @@ button {
    gap: 24px;
    border-radius: 8px;
    width: 30%;
-   height: calc(100% - 60px);
+   height: calc(100vh - 13em);
    padding: 2.9em 4.375em;
    background: rgba(217, 217, 217, 0.05);
    box-shadow: 0px 4px 50px 10px rgba(0, 0, 0, 0.5);
    z-index: 10;
+   margin-top: 9em;
    margin-right: 10em;
 
+}
+
+.content>#squad-area {
+   width: 100%;
 }
 
 .squad-container {
@@ -187,23 +203,31 @@ button {
    flex-direction: column;
    align-items: center;
    padding: 20px 0;
-   height: 500px;
-   width: 350px;
+   height: 400px;
+   width: calc((100% / 4) - 50px);
    background: rgba(217, 217, 217, 0.05);
    box-shadow: 0px 4px 50px 10px rgba(0, 0, 0, 0.5);
    z-index: 10;
 }
 
 .profile {
-   width: 200px;
-   height: 200px;
+   width: 150px;
+   height: 150px;
    background-color: #4B90D0;
    border-radius: 50%;
 }
 
 .profile-name {
    color: var(--text);
-   font-size: 2rem;
+   font-size: 1.6rem;
+}
+
+.icons {
+   fill: blue;
+}
+
+.icons.sm {
+   width: 35px;
 }
 
 .input-box {
@@ -222,9 +246,10 @@ button {
    align-items: center;
    background-color: #D9D9D9;
    border-radius: 8px;
-   height: 2.5em;
+   height: 4em;
    width: 70%;
    font-size: 1rem;
+   font-weight: 600;
    cursor: pointer;
 }
 
@@ -236,11 +261,9 @@ button {
    outline: none;
    border-radius: 6px;
    padding: 10px;
+   resize: vertical;
 }
 
-.theme-mode {
-   animation: icon-animation 150ms linear;
-}
 
 @media (max-width: 640px) {
 
@@ -331,12 +354,12 @@ button {
 
    }
 
-   #last-content {
+   #form-area {
       padding: 0 30px;
       margin-top: 0;
    }
 
-   #last-content .form {
+   #form-area .form {
       height: 70%;
       padding: 30px;
       margin-bottom: 80px;
@@ -426,10 +449,6 @@ button {
       border-radius: 6px;
       padding: 10px;
    }
-
-   .theme-mode {
-      animation: icon-animation 150ms linear;
-   }
 }
 
 @media (max-width: 768px) {}
@@ -449,5 +468,17 @@ button {
    to {
       transform: scale(1);
       opacity: 1;
+   }
+}
+
+@keyframes headerActive {
+   0% {
+      background-position: 0% 0%;
+   }
+   50% {
+      background-position: 50% 50%;
+   }
+   100% {
+      background-position: 100% 100%;
    }
 }
