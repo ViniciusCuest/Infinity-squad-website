@@ -13,7 +13,7 @@ const mode = document.getElementById("mode");
 const body = document.getElementById("body");
 const list = document.getElementById("list");
 
-const sections = body.clientHeight / 4;
+let sections;
 
 window.addEventListener("load", () => {
    const mode = localStorage.getItem("mode");
@@ -24,6 +24,10 @@ window.addEventListener("load", () => {
    }
    mode.innerHTML = darkIcon;
 });
+
+body.onresize = () => {
+   sections = body.clientHeight / 4;
+}
 
 body.onscroll = (evt) => {
    const currentScroll = evt.currentTarget.scrollY;
