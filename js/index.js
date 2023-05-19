@@ -13,7 +13,9 @@ const mode = document.getElementById("mode");
 const body = document.getElementById("body");
 const list = document.getElementById("list");
 
-let sections;
+const mainQtt = document.querySelectorAll("main").length;
+
+let sections = body.clientHeight / +mainQtt;
 
 window.addEventListener("load", () => {
    const mode = localStorage.getItem("mode");
@@ -31,25 +33,38 @@ body.onresize = () => {
 
 body.onscroll = (evt) => {
    const currentScroll = evt.currentTarget.scrollY;
+
+   for (let i = 0; i <= mainQtt; i++) {
+      if (currentScroll >= (sections * i) && currentScroll < (sections * (i + 1))) {
+         activeHeaderNavIndicator(activeIndex, i);
+         activeIndex = i;
+      }
+   }
+
    if (currentScroll > 150) {
       header.classList.add("active");
-   } else {
-      header.classList.remove("active");
+      return;
    }
+   header.classList.remove("active");
 }
 
 function changeIndex(e) {
    e.preventDefault();
    const index = e.target.attributes.id.value;
 
-   if (activeIndex != index)
-      document.getElementById(activeIndex).removeAttribute('class');
-
+   if (activeIndex != index) {
+      html.scroll({
+         top: sections * index,
+         behavior: 'smooth'
+      });
+      activeHeaderNavIndicator(activeIndex, index);
+   }
    activeIndex = index;
-   html.scroll({
-      top: sections * index,
-      behavior: 'smooth'
-   });
+}
+
+function activeHeaderNavIndicator(lastId, newId) {
+   document.getElementById(lastId).removeAttribute("class");
+   document.getElementById(newId).classList.add("active");
 }
 
 function iconAnimation(theme) {
