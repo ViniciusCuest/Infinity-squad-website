@@ -17,7 +17,7 @@ Landing Page | Infinity Squad.
 ## Authors
 
 - [@ViniciusCuest](https://github.com/ViniciusCuest)
-- [@Elias]
+- [@Elias](https://github.com/EliasBRodrigues)
 - [@João Jesus](https://github.com/jpfcordeiro)
 - [@Kaio]
 
