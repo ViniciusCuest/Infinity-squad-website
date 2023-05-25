@@ -1,0 +1,133 @@
+create database banana_project;
+use banana_project;
+
+CREATE TABLE usuario(
+	cod int auto_increment not null primary key,
+    nome varchar(50),
+    email varchar(30),
+    senha varchar(15),
+    telefone varchar(11),
+    data_nasc date
+);
+
+CREATE TABLE administrador(
+	cod_admin int auto_increment not null primary key,
+    nome_admin varchar(50),
+    email_admin varchar(30),
+    senha_admin varchar(15),
+    nivel_acesso_admin int
+);
+
+CREATE TABLE area_monitorada (
+    coord_lat varchar(15),
+    coord_long varchar(15),
+    cod_area int PRIMARY KEY UNIQUE auto_increment,
+    area_hectares FLOAT,
+    ultimaInteracao_area TIMESTAMP,
+    cod_imgUsuario int
+);
+ 
+CREATE TABLE img_usuario (
+    cod_img int auto_increment PRIMARY KEY UNIQUE,
+    link_img varchar(50),
+    data_img timestamp default current_timestamp
+);
+
+ALTER TABLE area_monitorada ADD CONSTRAINT FK_area_monitorada_2
+    FOREIGN KEY area_monitorada(cod_imgUsuario)
+    REFERENCES img_usuario(cod_img);
+
+CREATE TABLE tratamento (
+    cod_tratamento int PRIMARY KEY,
+    nome_remedio varchar(50),
+    descricao_tratamento varchar(255)
+);
+
+CREATE TABLE especie_banana (
+    cod_especie int not null auto_increment PRIMARY KEY UNIQUE,
+    nome_especie varchar(50),
+    descricao_especie varchar(255),
+    nomeCientifico_especie varchar(50)
+);
+
+CREATE TABLE agente_causador (
+    cod_agente int not null auto_increment PRIMARY KEY UNIQUE,
+    nome_agente varchar(30),
+    nomeCientifico_agente varchar(50)
+);
+
+CREATE TABLE nivel_risco(
+	cod_risco int auto_increment not null primary key,
+    titulo_risco varchar(30)
+);
+
+CREATE TABLE imagem_doenca(
+	cod_imagem int auto_increment not null primary key,
+    link_imagem varchar(50),
+    cod_doenca int
+);
+
+CREATE TABLE doenca (
+    cod_doenca int not null auto_increment PRIMARY KEY UNIQUE,
+    nome_doenca varchar(50),
+    nomeCientifico_doenca varchar(50),
+    descricao_doenca varchar(255),
+    controle_doenca varchar(255),
+    solucaoQuimica_doenca varchar(255),
+    cod_risco int,
+    cod_agente int,
+    solucaoCultura_doenca varchar(255),
+    prejuizos_doenca varchar(255)
+);
+
+ALTER TABLE doenca ADD CONSTRAINT FK_risco
+    FOREIGN KEY doenca(cod_risco)
+    REFERENCES nivel_risco(cod_risco);
+    
+ALTER TABLE doenca ADD CONSTRAINT FK_agente_causador
+    FOREIGN KEY doenca(cod_agente)
+    REFERENCES agente_causador(cod_agente);
+    
+ALTER TABLE imagem_doenca ADD CONSTRAINT FK_imagemDoenca
+    FOREIGN KEY imagem_doenca(cod_doenca)
+    REFERENCES doenca(cod_doenca);
+    
+CREATE TABLE diagnostico(
+	cod_diagnostico int auto_increment not null primary key,
+    area_cod int,
+    doenca_cod int,
+    especie_cod int,
+    data_diagnostico timestamp
+);
+
+ALTER TABLE diagnostico ADD CONSTRAINT FK_area_cod
+    FOREIGN KEY diagnostico(area_cod)
+    REFERENCES area_monitorada(cod_area);
+    
+ALTER TABLE diagnostico ADD CONSTRAINT FK_doenca_cod
+    FOREIGN KEY diagnostico(doenca_cod)
+    REFERENCES doenca(cod_doenca);    
+
+ALTER TABLE diagnostico ADD CONSTRAINT FK_especie_cod
+    FOREIGN KEY diagnostico(especie_cod)
+    REFERENCES especie_banana(cod_especie);
+    
+ 
+#select * from img_usuario;
+
+#select * from imagem_doenca a inner join doenca b on b.cod_doenca = a.cod_doenca group by a.cod_imagem; 
+
+insert into nivel_risco values (1, 'Baixo'), (2, 'Médio'), (3, 'Grave');
+
+insert into agente_causador values (1, 'Fungo', 'Fungus'), (2, 'Bactéria', 'Bacterus'), (3, 'Vírus', 'Vairus');
+
+insert into doenca values (0, 'Sigatoka Negra', 'Elias Claudio', 'Doença altamente contaminável', 'Não possui controle', 'Sem solução química', 1, 2, 'Sem solução cultural', 'Danos cerebrais');
+
+insert into imagem_doenca(link_imagem, cod_doenca) values ('./sigatoka.png', 1);
+insert into imagem_doenca(link_imagem, cod_doenca) values ('./sigatoka_elias.png', 1);
+
+#select * from doenca;
+#select * from imagem_doenca;
+
+Select * from doenca where cod_doenca = 1;
+ALTER DATABASE banana_project CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
