@@ -16,6 +16,7 @@
             <input type="file" id="imagemProblema" name="imagemProb" accept="image/png, image/jpeg">
             <button type="submit" id="botaoConfirma" name="botao"> Enviar </button>
         </form>
+        <img src="../src/assets/iphone_frente.png" class="image"/>
     </main>
     <button id="ajax"> Ajax </button>
 </body>
@@ -29,8 +30,9 @@
             error: ($err) => {
                 alert("Rato" + $err);
             },
+            
             success: (response) => {
-                alert(JSON.stringify(response));
+                
             }
         });
     });
