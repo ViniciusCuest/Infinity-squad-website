@@ -8,6 +8,7 @@
    --blue: #3b6ff3;
    --button-text: #fff;
    --track: #dcdcdc;
+   --musago: #22bd9e;
 }
 
 .dark:root {
@@ -34,29 +35,6 @@ body {
    overflow-x: hidden;
 }
 
-body::-webkit-scrollbar {
-   width: 15px;
-}
-
-body::-webkit-scrollbar-track {
-   background-color: var(--track);
-   border-radius: 100px;
-}
-
-body::-webkit-scrollbar-thumb {
-   border-radius: 12px;
-   background: var(--blue);
-   border: 3px solid var(--track);
-}
-
-body::-webkit-scrollbar-button {
-   display: none;
-}
-
-body::-webkit-scrollbar-corner {
-   background-color: transparent;
-}
-
 a,
 li {
    color: inherit;
@@ -76,6 +54,203 @@ button {
    display: flex;
    height: 100vh;
    width: 100%;
+}
+
+.wrapper.cms {
+   align-items: center;
+   justify-content: center;
+}
+
+.card-management {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 25%;
+   padding: 15px;
+   border-radius: 12px;
+   height: 300px;
+   background-color: red;
+   transition: all .2s ease;
+}
+
+.upload-single-image-container {
+   background: transparent 0% 0% no-repeat padding-box;
+   border: 1.5px dashed #707070;
+   opacity: 1;
+   width: 100%;
+   height: 200px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   cursor: pointer;
+}
+
+.upload-single-image-upload-text {
+   text-align: center;
+   font-size: 16px;
+   font-style: normal;
+   font-weight: normal;
+   line-height: 19px;
+   letter-spacing: 0em;
+
+   letter-spacing: 0px;
+   color: #c1272d;
+   opacity: 1;
+}
+
+.upload-single-image-upload-text-detail {
+   text-align: center;
+   letter-spacing: 0px;
+   font-size: 12px;
+   line-height: 14px;
+   color: #3d3d3d;
+   opacity: 1;
+   margin-top: 8px;
+}
+
+.form-grid {
+   display: grid;
+   width: 50%;
+   gap: 10px;
+   padding: 10px;
+   grid-template-areas: 
+      "diseaseName scientificName"
+      "descriptionArea descriptionArea"
+      "diseaseControl diseaseControl"
+      "chemicalSolution culturalSolution"
+      "riskLevel agent"
+      "losses losses"
+      "fileArea fileArea"
+      "submitButton submitButton";
+}
+
+.form-grid input {
+   width: 100%;
+   height: 2.2em;
+   background-color: var(--input-box);
+}
+
+.form-grid textarea {
+   width: 100%;
+   height: 3em;
+   resize: vertical;
+   background-color: var(--input-box);
+   border-radius: 8px;
+   outline: none;
+   border: 0;
+}
+
+.descriptionArea {
+   grid-area: descriptionArea;
+}
+.diseaseControl {
+   grid-area: diseaseControl;
+}
+.losses {
+   grid-area: losses;
+}
+.fileArea {
+   grid-area: fileArea;
+}
+.submitButton {
+   grid-area: submitButton;
+}
+.submitButton {
+
+}
+
+.upload-single-image-upload-text-icon {
+   width: 6rem;
+   height: 5.5rem;
+}
+
+.upload-single-image__uploaded-file-container {
+   display: flex;
+   justify-content: center;
+   max-width: 600px;
+}
+
+.upload-single-image__uploaded-file-description {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+}
+
+.upload-single-image__uploaded-file--icon {
+   font-size: 64px;
+}
+
+.upload-single-image-file-input {
+   display: none;
+}
+
+.upload-single-image__uploaded-file-status {
+   margin-top: 1rem;
+   color: #c1292e;
+}
+
+.upload-single-image__uploaded-remove--icon {
+   width: 1.4rem;
+   height: 1.4rem;
+   cursor: pointer;
+   margin-left: 4px;
+}
+
+.upload-single-image__upload-file-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100%;
+}
+
+.removeImage-btn {
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+   background: transparent;
+   margin: 5px 0;
+}
+
+.removeImage-btn p {
+   font-weight: 700;
+   margin-left: 5px;
+}
+
+
+.card-management>div {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+}
+
+.card-management+.card-management {
+   margin-left: 1rem;
+}
+
+.card-management h1 {
+   text-align: center;
+}
+
+.card-management button {
+   width: 60%;
+   height: 40px;
+   border-radius: 8px;
+   border: 0;
+   outline: none;
+   background-color: white;
+   cursor: pointer;
+}
+
+.card-management:hover {
+   transform: scale(.95);
+}
+
+.card-management#musago {
+   background-color: var(--musago);
 }
 
 .project-body {
@@ -229,6 +404,7 @@ button {
    overflow: hidden;
    border: 2px solid var(--text);
 }
+
 .read-more h4 {
    color: var(--button-text);
 }
@@ -367,6 +543,29 @@ button {
    border-radius: 6px;
    padding: 10px;
    resize: vertical;
+}
+
+body::-webkit-scrollbar {
+   width: 15px;
+}
+
+body::-webkit-scrollbar-track {
+   background-color: var(--track);
+   border-radius: 100px;
+}
+
+body::-webkit-scrollbar-thumb {
+   border-radius: 12px;
+   background: var(--blue);
+   border: 3px solid var(--track);
+}
+
+body::-webkit-scrollbar-button {
+   display: none;
+}
+
+body::-webkit-scrollbar-corner {
+   background-color: transparent;
 }
 
 @media screen and (max-width: 7000px) {
