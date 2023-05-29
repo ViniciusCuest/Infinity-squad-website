@@ -10,54 +10,52 @@
 </head>
 
 <body id="body">
-   <form class="form-grid" action="../src/php/insert.php" method="post" enctype="multipart/form-data">
+   <form class="form-grid" id="modalForm" method="post" enctype="multipart/form-data">
       <div class="grid">
          <div class="diseaseName">
-            <label for="nomeDoenca">Nome da Doença:</label><br>
-            <input type="text" class="input-box" id="nomeDoenca" name="nomeDoenca"><br>
+            <label for="nomeDoenca">Nome da Doença:</label>
+            <input type="text" class="input-box" id="nomeDoenca" name="nomeDoenca">
          </div>
          <div class="scientificName">
-            <label for="nomeCientifico">Nome Científico:</label><br>
-            <input type="text" class="input-box" id="nomeCientifico" name="nomeCientifico"><br>
+            <label for="nomeCientifico">Nome Científico:</label>
+            <input type="text" class="input-box" id="nomeCientifico" name="nomeCientifico">
          </div>
          <div class="descriptionArea">
-            <label for="descricao">Descrição:</label><br>
-            <textarea id="descricao" name="descricao"></textarea><br>
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao"></textarea>
          </div>
          <div class="diseaseControl">
-            <label for="controleDoenca">Controle da Doença:</label><br>
-            <textarea id="controleDoenca" name="controleDoenca"></textarea><br>
+            <label for="controleDoenca">Controle da Doença:</label>
+            <textarea id="controleDoenca" name="controleDoenca"></textarea>
          </div>
          <div class="culturalSolution">
-            <label for="solCultura">Solução Cultural:</label><br>
-            <textarea id="solCultura" name="solCultura"></textarea><br>
+            <label for="solCultura">Solução Cultural:</label>
+            <textarea id="solCultura" name="solCultura"></textarea>
          </div>
          <div class="chemicalSolution">
-            <label for="solQuimica">Solução Química:</label><br>
-            <textarea id="solQuimica" name="solQuimica"></textarea><br><br>
+            <label for="solQuimica">Solução Química:</label>
+            <textarea id="solQuimica" name="solQuimica"></textarea>
          </div>
          <div class="riskLevel">
-            <label for="nvRisco">Nível de Risco:</label><br>
-            <select name="nvRisco">
-               <option value="1">Baixo</option>
-               <option value="2">Médio</option>
-               <option value="3">Grave</option>
-            </select><br><br>
+            <label for="nvRisco">Nível de Risco:</label>
+            <select id="nvRisco" name="nvRisco">
+
+            </select>
          </div>
          <div class="agent">
-            <label for="agtCausador">Agente Causador:</label><br>
-            <select name="agtCausador">
+            <label for="agtCausador">Agente Causador:</label>
+            <select id="agtCausador" name="agtCausador">
                <option value="1">Fungo</option>
                <option value="2">Bactéria</option>
                <option value="3">Vírus</option>
-            </select><br><br>
+            </select>
          </div>
          <div class="losses">
-            <label for="prejuizos">Prejuízos da Doença:</label><br>
-            <textarea id="prejuizos" name="prejuizos"></textarea><br>
+            <label for="prejuizos">Prejuízos da Doença:</label>
+            <textarea id="prejuizos" name="prejuizos"></textarea>
          </div>
          <div class="fileArea">
-            <label for="imagensDoenca">Carregar imagens:</label><br>
+            <label for="imagensDoenca">Carregar imagens:</label>
             <div>
                <div draggable="true" id="divReference" class="upload-single-image-container">
                   <div id="uploadContainer" class="upload-single-image__upload-file-container">
@@ -67,8 +65,15 @@
                <button id="removeAll">Remove all Images</button>
             </div>
          </div>
-         <div class="submitButton"></div>
-         <button type="submit" name="enviarDoenca">Enviar</button>
+         <div class="submitButton">
+            <button type="" name="enviarDoenca">Cancelar</button>
+            <button id="submitModal" type="" name="enviarDoenca">Enviar</button>
+         </div>
+         <button id="closeModal" style="position:absolute; top: 0; right: 0; border-radius: 50%;">
+            <svg class="icons sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+               <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+            </svg>
+         </button>
       </div>
    </form>
    <h1>Lista de Doenças indentificadas</h1>
@@ -143,14 +148,68 @@
 <script src="../../src/js/jquery.js"></script>
 <script>
    $(document).ready(() => {
-      $("#openAddDiseaseModal").click(() => {
-         $(".form-grid").css({"display": "block"})
+
+      $.ajax({
+         type: "GET",
+         url: "../../src/php/select_risco.php",
+         dataType: "json",
+         success: (response) => {
+            response.map((item) => {
+               $("#nvRisco").append(`<option value='${item.cod_risco}'>${item.titulo_risco}</option>`)
+            })
+         },
+         error: (err) => {
+            alert('error ' + err.responseText)
+         }
       });
-      $(".form-grid").click(() => {
-         $(".form-grid").css({"display": "none"})
+
+
+      $("#submitModal").click((e) => {
+         e.preventDefault();
+         var form_data = new FormData(document.getElementById("modalForm"));
+         var data = {
+            nomeDoenca: $("#nomeDoenca").val(),
+            nomeCientifico: $("#nomeCientifico").val(),
+            descricao: $("#descricao").val(),
+            controleDoenca: $("#controleDoenca").val(),
+            solCultura: $("#solCultura").val(),
+            solQuimica: $("#solQuimica").val(),
+            nvRisco: $("#nomeDoenca").val(),
+            agtCausador: $("#nomeDoenca").val(),
+            prejuizos: $("#nomeDoenca").val(),
+         }
+
+         $.ajax({
+            type: "POST",
+            url: "../../src/php/insert.php",
+            dataType: "json",
+            data: data,
+            success: (Ea) => {
+               alert('sucesso' + Ea)
+            },
+            error: (err) => {
+               alert('error ' + err.responseText)
+            }
+         });
+      })
+      $("#openAddDiseaseModal").click((e) => {
+         e.preventDefault();
+         $("#body").css({
+            "overflow": "hidden"
+         });
+         $(".form-grid").css({
+            "display": "flex",
+            "overflow": "hidden"
+         });
+         $(".form-grid .grid").css({
+            "overflow": "auto",
+         });
       });
-      $("#openModal").click(() => {
-         $("#body").append("");
+      $("#closeModal").click((e) => {
+         e.preventDefault();
+         $(".form-grid").css({
+            "display": "none"
+         });
       });
    });
 </script>

@@ -1,10 +1,7 @@
 <?php
-
+header('Access-Control-Allow-Origin: *');
 include('../conexao.php');
-
 $pdo = Connection();
-
-$pdo->exec("SET CHARACTER SET utf8");
 
 $nome = $_POST["nomeDoenca"];
 $nomeCientifico = $_POST["nomeCientifico"];
@@ -32,8 +29,6 @@ $array_pdo = array(
 
 if ($con->execute($array_pdo)) {
     $cod_disease = $pdo->lastInsertId();
-    echo $cod_disease;
-    //Imagens
 
     $total_count = count($_FILES['imagensDoenca']['name']);
 
@@ -62,7 +57,6 @@ if ($con->execute($array_pdo)) {
 } else {
     echo "Rato";
 }
-;
 
-
+$pdo = null;
 ?>
