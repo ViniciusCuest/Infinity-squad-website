@@ -6,6 +6,8 @@ const EventTypes = ['dragenter', 'dragleave', 'dragover', 'drop'];
 
 let imagePath = [];
 
+$("#uploadContainer").append('<h1>Insira suas imagens aqui</h1>');
+
 const getFileInformation = (file) => {
    const reader = new FileReader();
    reader.readAsDataURL(file);
@@ -13,7 +15,6 @@ const getFileInformation = (file) => {
       $("#uploadContainer").empty();
       imagePath.push(reader.result);
       imagePath.map(item => {
-         console.log(item);
          $("#uploadContainer").append("<img id='img-click' height='40%' src='" + item + "'/>");
       });
    }
@@ -21,6 +22,14 @@ const getFileInformation = (file) => {
 
 $("#removeAll").click((e) => {
    e.preventDefault();
+
+   if (imagePath.length === 1) {
+      imagePath.pop();
+      $("#img-click").remove();
+      $("#uploadContainer").append('<h1>Insira suas imagens aqui</h1>');
+      return;
+   }
+   imagePath.pop();
    $("#img-click").remove();
 });
 
