@@ -11,63 +11,65 @@
 
 <body id="body">
    <form class="form-grid" action="../src/php/insert.php" method="post" enctype="multipart/form-data">
-      <div class="diseaseName">
-         <label for="nomeDoenca">Nome da Doença:</label><br>
-         <input type="text" class="input-box" id="nomeDoenca" name="nomeDoenca"><br>
-      </div>
-      <div class="scientificName">
-         <label for="nomeCientifico">Nome Científico:</label><br>
-         <input type="text" class="input-box" id="nomeCientifico" name="nomeCientifico"><br>
-      </div>
-      <div class="descriptionArea">
-         <label for="descricao">Descrição:</label><br>
-         <textarea id="descricao" name="descricao"></textarea><br>
-      </div>
-      <div class="diseaseControl">
-         <label for="controleDoenca">Controle da Doença:</label><br>
-         <textarea id="controleDoenca" name="controleDoenca"></textarea><br>
-      </div>
-      <div class="culturalSolution">
-         <label for="solCultura">Solução Cultural:</label><br>
-         <textarea id="solCultura" name="solCultura"></textarea><br>
-      </div>
-      <div class="chemicalSolution">
-         <label for="solQuimica">Solução Química:</label><br>
-         <textarea id="solQuimica" name="solQuimica"></textarea><br><br>
-      </div>
-      <div class="riskLevel">
-         <label for="nvRisco">Nível de Risco:</label><br>
-         <select name="nvRisco">
-            <option value="1">Baixo</option>
-            <option value="2">Médio</option>
-            <option value="3">Grave</option>
-         </select><br><br>
-      </div>
-      <div class="agent">
-         <label for="agtCausador">Agente Causador:</label><br>
-         <select name="agtCausador">
-            <option value="1">Fungo</option>
-            <option value="2">Bactéria</option>
-            <option value="3">Vírus</option>
-         </select><br><br>
-      </div>
-      <div class="losses">
-         <label for="prejuizos">Prejuízos da Doença:</label><br>
-         <textarea id="prejuizos"name="prejuizos"></textarea><br>
-      </div>
-      <div class="fileArea">
-         <label for="imagensDoenca">Carregar imagens:</label><br>
-         <div>
-            <div draggable="true" id="divReference" class="upload-single-image-container">
-               <div id="uploadContainer" class="upload-single-image__upload-file-container">
-                  <input id="fileInputReference" class="upload-single-image-file-input" type="file" name="imagensDoenca[]" multiple="multiple">
-               </div>
-            </div>
-            <button id="removeAll">Remove all Images</button>
+      <div class="grid">
+         <div class="diseaseName">
+            <label for="nomeDoenca">Nome da Doença:</label><br>
+            <input type="text" class="input-box" id="nomeDoenca" name="nomeDoenca"><br>
          </div>
+         <div class="scientificName">
+            <label for="nomeCientifico">Nome Científico:</label><br>
+            <input type="text" class="input-box" id="nomeCientifico" name="nomeCientifico"><br>
+         </div>
+         <div class="descriptionArea">
+            <label for="descricao">Descrição:</label><br>
+            <textarea id="descricao" name="descricao"></textarea><br>
+         </div>
+         <div class="diseaseControl">
+            <label for="controleDoenca">Controle da Doença:</label><br>
+            <textarea id="controleDoenca" name="controleDoenca"></textarea><br>
+         </div>
+         <div class="culturalSolution">
+            <label for="solCultura">Solução Cultural:</label><br>
+            <textarea id="solCultura" name="solCultura"></textarea><br>
+         </div>
+         <div class="chemicalSolution">
+            <label for="solQuimica">Solução Química:</label><br>
+            <textarea id="solQuimica" name="solQuimica"></textarea><br><br>
+         </div>
+         <div class="riskLevel">
+            <label for="nvRisco">Nível de Risco:</label><br>
+            <select name="nvRisco">
+               <option value="1">Baixo</option>
+               <option value="2">Médio</option>
+               <option value="3">Grave</option>
+            </select><br><br>
+         </div>
+         <div class="agent">
+            <label for="agtCausador">Agente Causador:</label><br>
+            <select name="agtCausador">
+               <option value="1">Fungo</option>
+               <option value="2">Bactéria</option>
+               <option value="3">Vírus</option>
+            </select><br><br>
+         </div>
+         <div class="losses">
+            <label for="prejuizos">Prejuízos da Doença:</label><br>
+            <textarea id="prejuizos" name="prejuizos"></textarea><br>
+         </div>
+         <div class="fileArea">
+            <label for="imagensDoenca">Carregar imagens:</label><br>
+            <div>
+               <div draggable="true" id="divReference" class="upload-single-image-container">
+                  <div id="uploadContainer" class="upload-single-image__upload-file-container">
+                     <input id="fileInputReference" class="upload-single-image-file-input" type="file" name="imagensDoenca[]" multiple="multiple">
+                  </div>
+               </div>
+               <button id="removeAll">Remove all Images</button>
+            </div>
+         </div>
+         <div class="submitButton"></div>
+         <button type="submit" name="enviarDoenca">Enviar</button>
       </div>
-      <div class="submitButton"></div>
-      <button type="submit" name="enviarDoenca">Enviar</button>
    </form>
    <h1>Lista de Doenças indentificadas</h1>
    <table>
@@ -132,10 +134,21 @@
          ?>
       </tbody>
    </table>
+   <button id="openAddDiseaseModal" class="float-button">
+      <svg class="icons sm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+         <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+      </svg>
+   </button>
 </body>
 <script src="../../src/js/jquery.js"></script>
 <script>
    $(document).ready(() => {
+      $("#openAddDiseaseModal").click(() => {
+         $(".form-grid").css({"display": "block"})
+      });
+      $(".form-grid").click(() => {
+         $(".form-grid").css({"display": "none"})
+      });
       $("#openModal").click(() => {
          $("#body").append("");
       });

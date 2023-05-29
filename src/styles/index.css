@@ -111,11 +111,27 @@ button {
 }
 
 .form-grid {
-   display: grid;
+   z-index: 5;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 20px;
+   position: relative;
+   width: 100%;
+   height: 100vh;
+   background-color: rgba(0, 0, 0, .7);
+}
+
+.form-grid .grid {
+   position: absolute;
    width: 50%;
+   z-index: 10;
+   background-color: white;
+   display: grid;
    gap: 10px;
-   padding: 10px;
-   grid-template-areas: 
+   padding: 30px;
+   border-radius: 12px;
+   grid-template-areas:
       "diseaseName scientificName"
       "descriptionArea descriptionArea"
       "diseaseControl diseaseControl"
@@ -145,21 +161,24 @@ button {
 .descriptionArea {
    grid-area: descriptionArea;
 }
+
 .diseaseControl {
    grid-area: diseaseControl;
 }
+
 .losses {
    grid-area: losses;
 }
+
 .fileArea {
    grid-area: fileArea;
 }
+
 .submitButton {
    grid-area: submitButton;
 }
-.submitButton {
 
-}
+.submitButton {}
 
 .upload-single-image-upload-text-icon {
    width: 6rem;
@@ -270,6 +289,42 @@ button {
    background-color: var(--light);
    filter: blur(120px);
    z-index: 1;
+}
+
+.project-body-container {
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   width: 100%;
+   flex-direction: row;
+}
+
+.prototype-mockup {
+   display: flex;
+   align-items: center;
+   position: relative;
+   flex-direction: column;
+   overflow: hidden;
+   width: auto;
+   width: 20vw;
+}
+
+.mockup {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: relative;
+   width: 100%;
+   z-index: 3;
+   overflow: hidden;
+}
+
+.screenshot {
+   position: absolute;
+   width: 90%;
+   z-index: 0;
+   margin-top: 20px;
+   animation: screenAccess .27s linear;
 }
 
 .header {
@@ -508,6 +563,20 @@ button {
 
 .icons.sm {
    width: 35px;
+}
+
+.float-button {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   position: fixed;
+   width: 60px;
+   height: 60px;
+   border-radius: 50%;
+   background-color: #000;
+   bottom: 0;
+   right: 0;
+   margin: 30px;
 }
 
 .input-box {
@@ -915,5 +984,21 @@ body::-webkit-scrollbar-corner {
 
    100% {
       background-position: 100% 100%;
+   }
+}
+
+@keyframes screenAccess {
+   0% {
+      transform: translateX(110%);
+      opacity: 0;
+   }
+
+   70% {
+      opacity: .2;
+   }
+
+   100% {
+      transform: translateX(0%);
+      opacity: 1;
    }
 }
