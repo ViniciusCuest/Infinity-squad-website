@@ -127,6 +127,33 @@ button {
    background-color: rgba(0, 0, 0, .6);
 }
 
+.table {
+   width: 100%;
+   table-layout: fixed;
+}
+
+.tbl-header {
+   width: 80%;
+   background-color: rgba(48, 48, 48, 0.3);
+}
+
+.tbl-content {
+   width: 80%;
+   height: 300px;
+   overflow-x: auto;
+   margin-top: 0px;
+   border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.table-header-item {
+   text-align: center;
+}
+
+.table-row>td {
+   vertical-align: middle;
+   text-align: center;
+}
+
 .form-grid .grid {
    position: relative;
    height: 95vh;
@@ -1038,6 +1065,7 @@ body::-webkit-scrollbar-corner {
    0% {
       transform: rotate(0deg);
    }
+
    100% {
       transform: rotate(360deg);
    }
