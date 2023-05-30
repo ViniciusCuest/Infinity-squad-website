@@ -12,7 +12,7 @@ const getFileInformation = (file) => {
    const reader = new FileReader();
    reader.readAsDataURL(file);
    reader.onload = () => {
-      $("#uploadContainer").empty();
+      //$("#uploadContainer").empty();
       imagePath.push(reader.result);
       imagePath.map(item => {
          $("#uploadContainer").append("<img id='img-click' height='40%' src='" + item + "'/>");
