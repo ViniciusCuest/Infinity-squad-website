@@ -115,6 +115,32 @@ button {
    margin-top: 8px;
 }
 
+.delete-modal {
+   z-index: 5;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 20px;
+   top: 0;
+   position: absolute;
+   width: 100%;
+   height: 100vh;
+   background-color: rgba(0, 0, 0, .6);
+}
+
+.delete-modal-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   background-color: lightblue;
+   border-radius: 12px;
+   width: 500px;
+   height: 250px;
+}
+
+/*display: none; background-color: lightgray; position: absolute; width: 450px; height: 250px; border-radius: 8px; left:0; top:0; transform: translate(150%, 150%) */
+
 .form-grid {
    z-index: 5;
    display: none;
@@ -152,6 +178,10 @@ button {
 .table-row>td {
    vertical-align: middle;
    text-align: center;
+}
+
+.table-body td button {
+   cursor: pointer;
 }
 
 .form-grid .grid {
@@ -634,6 +664,7 @@ button {
    bottom: 0;
    right: 0;
    margin: 30px;
+   cursor: pointer;
 }
 
 .input-box {
