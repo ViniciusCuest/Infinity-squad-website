@@ -1,5 +1,5 @@
 :root {
-   --body-bg: #fbfbfb;
+   --body-bg: #f2f8fe;
    --text: #000;
    --text-gradient: linear-gradient(90deg, #000000d9 0%, rgba(115, 152, 247, 0.907943) 21.07%, rgba(12, 76, 241, 0.84) 85.86%);
    --header-gradient: linear-gradient(var(--body-bg));
