@@ -27,13 +27,11 @@ if ($con->execute($array_pdo)) {
 
     $total_count = count($_FILES['imagensDoenca']['name']);
 
-    // Loop through every file
+    $response['message'] = $total_count;
+
     for ($i = 0; $i < $total_count; $i++) {
-        //The temp file path is obtained
         $tmpFilePath = $_FILES['imagensDoenca']['tmp_name'][$i];
-        //A file path needs to be present
         if ($tmpFilePath != "") {
-            //Setup our new file path
             $newFilePath = "../img/" . $_FILES['imagensDoenca']['name'][$i];
             //File is uploaded to temp dir
             if (move_uploaded_file($tmpFilePath, $newFilePath)) {

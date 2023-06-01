@@ -1,11 +1,15 @@
 <?php
 
 include('../conexao.php');
-
 $pdo = Connection();
 
+$response = array(
+    'status' => 500,
+    'message' => 'Form submission failed, please try again.'
+);
+
 if (isset($_POST['botao'])) {
-    $dir = "./";
+    $dir = "../img/";
     $file = isset($_FILES['imagemProb']) ? $_FILES['imagemProb'] : FALSE;
     $destiny = $dir . $file['name'];
 

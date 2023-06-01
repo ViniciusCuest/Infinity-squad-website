@@ -6,16 +6,17 @@ const EventTypes = ['dragenter', 'dragleave', 'dragover', 'drop'];
 
 let imagePath = [];
 
-$("#uploadContainer").append('<h1>Insira suas imagens aqui</h1>');
+$("#uploadContainer").append('<h1 id="file-text">Insira suas imagens aqui</h1>');
 
 const getFileInformation = (file) => {
    const reader = new FileReader();
    reader.readAsDataURL(file);
    reader.onload = () => {
-      //$("#uploadContainer").empty();
+      $(".img-click").remove();
+      $("#file-text").remove();
       imagePath.push(reader.result);
       imagePath.map(item => {
-         $("#uploadContainer").append("<img id='img-click' height='40%' src='" + item + "'/>");
+         $("#uploadContainer").append("<img id='img-click' class='img-click' height='40%' src='" + item + "'/>");
       });
    }
 }
@@ -23,14 +24,11 @@ const getFileInformation = (file) => {
 $("#removeAll").click((e) => {
    e.preventDefault();
 
-   if (imagePath.length === 1) {
-      imagePath.pop();
-      $("#img-click").remove();
-      $("#uploadContainer").append('<h1>Insira suas imagens aqui</h1>');
-      return;
-   }
-   imagePath.pop();
-   $("#img-click").remove();
+   if(imagePath.length) 
+      $("#uploadContainer").append('<h1 id="file-text">Insira suas imagens aqui</h1>');
+
+   imagePath = [];
+   $(".img-click").remove();
 });
 
 const validateFileRequirements = (file) => {
@@ -43,7 +41,8 @@ const validateFileRequirements = (file) => {
 
 fileContainer.addEventListener("change", (e) => {
    if (e.currentTarget.files.length)
-      validateFileRequirements(e.currentTarget.files[0]);
+      for (let i = 0; i < e.currentTarget.files.length; i++)
+         validateFileRequirements(e.currentTarget.files[i]);
 });
 
 divContainer.addEventListener("click", () => {

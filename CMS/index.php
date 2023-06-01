@@ -21,7 +21,6 @@
             </div>
         </section>
         <section class="card-management" id="musago">
-            <img src="../src/assets/iconMusa.png" alt="">
             <div>
                 <h1>
                     Gerenciar Musago App
