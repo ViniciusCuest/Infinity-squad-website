@@ -2,13 +2,15 @@
    --body-bg: #f2f8fe;
    --text: #000;
    --text-gradient: linear-gradient(90deg, #000000d9 0%, rgba(115, 152, 247, 0.907943) 21.07%, rgba(12, 76, 241, 0.84) 85.86%);
-   --header-gradient: linear-gradient(var(--body-bg));
+   --header-gradient: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.908) 50.07%, rgba(255, 255, 255, 0.2) 70%);
    --input-box: #dddddd;
    --musaGo-mainColor: rgba(5, 140, 117, 0.95);
    --blue: #3b6ff3;
-   --button-text: #fff;
+   --button-text: #000;
    --track: #dcdcdc;
    --musago: #22bd9e;
+   --shadow: 0px 4px 50px 10px rgba(0, 0, 0, 0.2);
+   --button-text-hover: #fff;
 }
 
 .dark:root {
@@ -19,6 +21,8 @@
    --header-gradient: linear-gradient(180deg, #000 15%, rgba(0, 115, 255, 0.003) 85%, rgba(0, 0, 0, 0) 100%);
    --input-box: #D9D9D9;
    --button-text: #fff;
+   --shadow: 0px 4px 50px 10px rgba(0, 0, 0, 0.5);
+   --button-text-hover: #fff;
 }
 
 * {
@@ -356,6 +360,7 @@ TABELA
    font-weight: 700;
    margin-left: 5px;
 }
+
 .card-management {
    position: relative;
 }
@@ -398,7 +403,7 @@ TABELA
    background-color: var(--musago);
 }
 
-.card-management > img {
+.card-management>img {
    position: absolute;
    z-index: 0;
 }
@@ -634,10 +639,8 @@ TABELA
    border: 2px solid var(--blue);
 }
 
-
-
 .read-more:hover h4 {
-   color: var(--button-text);
+   color: var(--button-text-hover);
    z-index: 100;
 }
 
@@ -659,7 +662,7 @@ TABELA
    height: calc(100vh - 13em);
    padding: 2.9em 4.375em;
    background: rgba(217, 217, 217, 0.05);
-   box-shadow: 0px 4px 50px 10px rgba(0, 0, 0, 0.5);
+   box-shadow: var(--shadow);
    z-index: 10;
    margin-top: 9em;
    margin-right: 10em;
@@ -683,17 +686,27 @@ TABELA
    display: flex;
    flex-direction: column;
    align-items: center;
+   justify-content: center;
    padding: 20px 0;
    height: calc(100vh / 1.8);
    width: calc((100% / 4) - 50px);
    background: rgba(217, 217, 217, 0.05);
-   box-shadow: 0px 4px 50px 10px rgba(0, 0, 0, 0.5);
+   box-shadow: var(--shadow);
    z-index: 10;
+   transition: all .25s ease;
+}
+
+.squad-content:hover {
+   transform: scale(.97);
 }
 
 .profile {
-   background-color: #4B90D0;
-   border-radius: 50%;
+   display: flex;
+   justify-content: center;
+}
+
+.profile>img {
+   filter: grayscale(35%);
 }
 
 .profile-name {

@@ -10,7 +10,7 @@ $response = array(
 
 if (isset($_POST['botao'])) {
     $dir = "../img/";
-    $file = isset($_FILES['imagemProb']) ? $_FILES['imagemProb'] : FALSE;
+    $file = isset($_FILES['img-diagnostico']) ? $_FILES['img-diagnostico'] : FALSE;
     $destiny = $dir . $file['name'];
 
     if (move_uploaded_file($file['tmp_name'], $destiny)) {

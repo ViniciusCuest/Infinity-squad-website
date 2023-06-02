@@ -20,7 +20,7 @@
             <div>
                 <div draggable="true" id="divReference" class="upload-single-image-container proj">
                     <div id="uploadContainer" class="upload-single-image__upload-file-container">
-                        <input id="fileInputReference" class="upload-single-image-file-input" type="file" name="imagensDoenca[]" multiple="multiple">
+                        <input id="fileInputReference" class="upload-single-image-file-input" type="file" name="img-diagnostico">
                     </div>
                 </div>
                 <button id="removeAll">Remove all Images</button>
@@ -32,10 +32,12 @@
     <button id="ajax"> Ajax </button>
 -->
 </body>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script type="text/javascript">
-    $(document).ready(async () => {
-        $("#prototype-mockup").one('click', () => {
+    $(document).ready(() => {
+        $("#prototype-mockup").one('click', (e) => {
+            e.preventDefault();
             $('.screenshot').remove();
             $('.prototype-mockup').append('<img src="../src/assets/blank-screen.png" class="screenshot" />');
             $('.prototype-mockup').append('<div class="loadApp"></div>');
@@ -46,11 +48,16 @@
             }, 2500);
         });
 
-        $("#dash-screen").one("click", () => {
-
+        $("#prototype-mockup").click((e) => {
+            e.preventDefault();
+            if (e.currentTarget.children['dash-screen']) {
+                $('.screenshot').remove();
+                $('.prototype-mockup').append('<img src="../src/assets/camera.png" id="camera" class="screenshot" />');
+            }
         });
 
-        $('#ajax').click(() => {
+        $('#ajax').click((e) => {
+            e.preventDefault();
             $.ajax({
                 method: "GET",
                 url: "../src/php/result.php",
