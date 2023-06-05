@@ -13,7 +13,7 @@ $cod_doenca = $_GET['cod_doenca'];
 $img = $pdo->prepare('SELECT * FROM imagem_doenca where cod_doenca = :cod');
 $img->bindParam(':cod', $cod_doenca);
 
-if ($img->execute() && $img->rowCount()) {
+if ($img->execute() && $img->rowCount() > 0) {
     $img_data = $img->fetchAll();
 
     $deleted = false;
@@ -35,8 +35,8 @@ if ($img->execute() && $img->rowCount()) {
         }
     }
 } else {
-    $q = $pdo->prepare("DELETE FROM doenca WHERE cod_doenca = :new");
-    $q->bindParam(':new', $cod_doenca);
+    $q = $pdo->prepare("DELETE FROM doenca WHERE cod_doenca = :new_doenca");
+    $q->bindParam(':new_doenca', $cod_doenca);
     if ($q->execute())
         $response['status'] = 200;
     else 

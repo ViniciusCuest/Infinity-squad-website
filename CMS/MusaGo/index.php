@@ -15,9 +15,9 @@
       <section style="display: none;" class="delete-modal" id="deleteModal">
          <div class="delete-modal-container">
             <h1>Deseja realmente excluir ?</h1>
-            <div>
-               <button style="cursor: pointer; width: 50px; height: 50px" id="deletarDado">Sim</button>
-               <button style="cursor: pointer; width: 50px; height: 50px" id="closeDeleteModal">Não</button>
+            <div style="display: flex; flex-direction: row; width: 100%; align-items: center; justify-content: center">
+               <button id="deletarDado">Sim</button>
+               <button id="closeDeleteModal">Não</button>
             </div>
          </div>
       </section>
@@ -67,7 +67,7 @@
                <button type="button" name="enviarDoenca">Cancelar</button>
                <button id="submitModalEdit" type="submit" name="enviarDoenca">Enviar</button>
             </div>
-            <button id="closeModal" style="position:absolute; top: 0; right: 0; border-radius: 50%;">
+            <button id="closeModal" type="button" style="position:absolute; top: 0; right: 0; border-radius: 50%;">
                <svg class="icons sm" style="fill: var(--button-text); width: 28px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                   <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
                </svg>
@@ -316,8 +316,6 @@
             success: (response) => {
                if (response.status == 200)
                   window.location.reload();
-               else
-                  alert(response.message);
             },
             error: (err) => {
                alert('error ' + err.responseText);
@@ -350,6 +348,13 @@
          $("#prejuizosEdit").val(e.currentTarget.attributes.data_prejuizo.value);
          $("#modalEdit").css({
             display: 'flex'
+         });
+      });
+
+      $(document).on("click", "#closeModal", (e) => {
+         e.preventDefault();
+         $(".form-grid").css({
+            "display": "none"
          });
       });
 
@@ -393,12 +398,6 @@
          });
          $(".form-grid .grid").css({
             "overflow": "auto",
-         });
-      });
-      $("#closeModal").click((e) => {
-         e.preventDefault();
-         $(".form-grid").css({
-            "display": "none"
          });
       });
 

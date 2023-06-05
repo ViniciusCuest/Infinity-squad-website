@@ -142,10 +142,28 @@ button {
    flex-direction: column;
    align-items: center;
    justify-content: center;
-   background-color: lightblue;
+   background-color: white;
    border-radius: 12px;
-   width: 500px;
+   width: 450px;
    height: 250px;
+}
+
+.delete-modal-container button {
+   width: 40%;
+   height: 35px;
+   font-size: 1rem;
+   font-weight: 600;
+   background-color: #009879;
+   border-radius: 6px;
+   cursor: pointer;
+}
+
+.delete-modal-container button + button {
+   margin-left: 10px;
+}
+
+#closeDeleteModal {
+   background-color: #c1272d;
 }
 
 /*display: none; background-color: lightgray; position: absolute; width: 450px; height: 250px; border-radius: 8px; left:0; top:0; transform: translate(150%, 150%) */
@@ -410,6 +428,16 @@ TABELA
 
 .card-management#musago h1 {
    color: #000;
+}
+
+.form-grid #submitModalEdit,
+.form-grid #submitModal {
+   width: 15%;
+   background-color: #009879;
+   height: 30px;
+   border-radius: 8px;
+   color: #fff;
+   font-weight: 600;
 }
 
 .card-management>img {
