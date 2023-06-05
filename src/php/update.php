@@ -10,17 +10,35 @@ $response = array(
 );
 
 $cod_doenca = $_POST['cod_doenca'];
-$nome = $_POST["nomeDoenca"];
-$nomeCientifico = $_POST["nomeCientifico"];
-$descricao = $_POST["descricao"];
-$controleDoenca = $_POST["controleDoenca"];
-$solCultura = $_POST["solCultura"];
-$solQuimica = $_POST["solQuimica"];
-$nvRisco = $_POST["nvRisco"];
-$agtCausador = $_POST["agtCausador"];
-$prejuizos = $_POST["prejuizos"];
+$nome = $_POST["nome_doenca"];
+$nomeCientifico = $_POST["nomeCientifico_doenca"];
+$descricao = $_POST["descricaoEdit"];
+$controleDoenca = $_POST["controle_Doenca"];
+$solCultura = $_POST["sol_Cultura"];
+$solQuimica = $_POST["solucaoQuimica_doenca"];
+$prejuizos = $_POST["prejuizos_doenca"];
 
-$con = $pdo->prepare('UPDATE doenca SET :nome_doenca, :nomeCientifico_doenca, :descricao_doenca, :controle_doenca, :solucaoQuimica_doenca, :cod_risco, :cod_agente, :solucaoCultura_doenca, :prejuizos_doenca WHERE cod_doenca = :cod_doenca');
+if(isset($_FILES["imagensAdicionar"])) {
+    $total_count = count($_FILES['imagensAdicionar']['name']);
+    for ($i = 0; $i < $total_count; $i++) {
+        $tmpFilePath = $_FILES['imagensAdicionar']['tmp_name'][$i];
+        if ($tmpFilePath != "") {
+            $newFilePath = "../img/" . $_FILES['imagensAdicionar']['name'][$i];
+            //File is uploaded to temp dir
+            if (move_uploaded_file($tmpFilePath, $newFilePath)) {
+                $con = $pdo->prepare("Insert into imagem_doenca(link_imagem, cod_doenca) values (?, ?)");
+                $con->bindParam(1, $newFilePath);
+                $con->bindParam(2, $cod_doenca);
+                if ($con->execute())
+                    $response['status'] = 200;
+                else
+                    $response['message'] = "File not uploaded";
+            }
+        }
+    }
+}
+
+$con = $pdo->prepare('UPDATE doenca SET nome_doenca = :nome_doenca, nomeCientifico_doenca = :nomeCientifico_doenca, descricao_doenca = :descricao_doenca, controle_doenca = :controle_doenca, solucaoQuimica_doenca=:solucaoQuimica_doenca,solucaoCultura_doenca= :solucaoCultura_doenca, prejuizos_doenca= :prejuizos_doenca WHERE cod_doenca = :cod_doenca');
 
 $array_pdo = array(
     ':nome_doenca' => $nome,
@@ -28,18 +46,14 @@ $array_pdo = array(
     ':descricao_doenca' => $descricao,
     ':controle_doenca' => $controleDoenca,
     ':solucaoQuimica_doenca' => $solQuimica,
-    ':cod_risco' => $nvRisco,
-    ':cod_agente' => $agtCausador,
     ':solucaoCultura_doenca' => $solCultura,
     ':prejuizos_doenca' => $prejuizos,
     ':cod_doenca' => $cod_doenca
 );
 
-if($con->execute($array_pdo))
+if ($con->execute($array_pdo))
     $response['status'] = 200;
-else 
+else
     $response['message'] = 'Error while updating this data';
-    
-echo json_encode($response);
 
-?>
+echo json_encode($response);

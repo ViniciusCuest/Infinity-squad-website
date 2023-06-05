@@ -33,31 +33,31 @@
             </div>
             <div class="descriptionArea">
                <label for="descricao">Descrição:</label>
-               <textarea id="descricaoEdit" name="descricao"></textarea>
+               <textarea id="descricaoEdit" name="descricaoEdit"></textarea>
             </div>
             <div class="diseaseControl">
                <label for="controleDoenca">Controle da Doença:</label>
-               <textarea id="controleDoencaEdit" name="controleDoenca"></textarea>
+               <textarea id="controleDoencaEdit" name="controle_Doenca"></textarea>
             </div>
             <div class="culturalSolution">
                <label for="solCultura">Solução Cultural:</label>
-               <textarea id="solCulturaEdit" name="solCultura"></textarea>
+               <textarea id="solCulturaEdit" name="sol_Cultura"></textarea>
             </div>
             <div class="chemicalSolution">
                <label for="solQuimicaEdit">Solução Química:</label>
                <textarea id="solQuimicaEdit" name="solucaoQuimica_doenca"></textarea>
             </div>
-            <input type="hidden" name="cod_doenca">
+            <input type="hidden" id="cod_doenca" name="cod_doenca">
             <div class="losses">
                <label for="prejuizos">Prejuízos da Doença:</label>
-               <textarea id="prejuizosEdit" name="prejuizos"></textarea>
+               <textarea id="prejuizosEdit" name="prejuizos_doenca"></textarea>
             </div>
             <div class="fileArea">
                <label for="imagensDoenca">Carregar imagens:</label>
                <div>
                   <div draggable="true" id="divReference" class="upload-single-image-container">
                      <div id="uploadContainer" class="upload-single-image__upload-file-container">
-                        <input id="fileInputReference" class="upload-single-image-file-input" type="file" name="imagensDoenca[]" multiple="multiple">
+                        <input id="fileInputReference" class="upload-single-image-file-input" type="file" name="imagensAdicionar[]" multiple="multiple">
                      </div>
                   </div>
                   <button id="removeAll">Remove all Images</button>
@@ -338,7 +338,7 @@
       $(document).on("click", ".row #openModal", (e) => {
          e.preventDefault();
 
-         console.log(e.currentTarget.attributes);
+         $("#cod_doenca").val(e.currentTarget.attributes.data_cod.value)
          $("#nomeDoencaEdit").val(e.currentTarget.attributes.data_nome.value);
          $("#nomeCientificoEdit").val(e.currentTarget.attributes.data_cientifico.value);
          $("#descricaoEdit").val(e.currentTarget.attributes.data_descricao.value);
