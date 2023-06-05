@@ -3,10 +3,13 @@
 include('../conexao.php');
 
 $pdo = Connection();
-$pdo -> exec("SET CHARACTER SET utf8");
+
+$response = array(
+    'status' => 500,
+    'message' => 'Form submission failed, please try again.'
+);
 
 $cod_doenca = $_POST['cod_doenca'];
-
 $nome = $_POST["nomeDoenca"];
 $nomeCientifico = $_POST["nomeCientifico"];
 $descricao = $_POST["descricao"];
@@ -32,7 +35,11 @@ $array_pdo = array(
     ':cod_doenca' => $cod_doenca
 );
 
-$con->execute($array_pdo);
-echo $con->rowCount();
+if($con->execute($array_pdo))
+    $response['status'] = 200;
+else 
+    $response['message'] = 'Error while updating this data';
+    
+echo json_encode($response);
 
 ?>

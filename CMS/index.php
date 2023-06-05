@@ -11,7 +11,7 @@
 
 <body>
     <main class="wrapper cms">
-        <section class="card-management">
+        <section class="dark card-management">
             <img src="" alt="">
             <div>
                 <h1>

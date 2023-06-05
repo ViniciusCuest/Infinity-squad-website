@@ -33,9 +33,6 @@
             <button type="button" id="submit" name="botao"> Enviar </button>
         </form>
     </main>
-    <!--
-    <button id="ajax"> Ajax </button>
--->
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script type="text/javascript">
@@ -74,8 +71,14 @@
         $('#submit').click((e) => {
             e.preventDefault();
 
-            if (!availableToSend) 
+            if (!availableToSend)
                 return;
+
+            $.ajax({
+                type: "POST",
+                data: {},
+                dataType: 'json',
+            })
 
             $.ajax({
                 method: "GET",
@@ -83,10 +86,12 @@
                 dataType: 'json',
                 beforeSend: () => {
                     $("#loading").addClass('loading');
-                    $("#load").css({ display: "block" });
+                    $("#load").css({
+                        display: "block"
+                    });
                 },
                 error: ($err) => {
-                    alert("Rato" + $err);
+
                 },
 
                 success: (response) => {

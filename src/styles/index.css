@@ -75,8 +75,12 @@ button {
    padding: 15px;
    border-radius: 12px;
    height: 300px;
-   background-color: red;
+   background: linear-gradient(142.73deg, #121216 5.2%, rgba(8, 6, 32, 0.85) 89.26%);
    transition: all .2s ease;
+}
+
+.card-management h1 {
+   color: #fff;
 }
 
 .upload-single-image-container {
@@ -402,6 +406,10 @@ TABELA
 .card-management#musago {
    background-image: url(../assets/iconMusa.png);
    background-color: var(--musago);
+}
+
+.card-management#musago h1 {
+   color: #000;
 }
 
 .card-management>img {

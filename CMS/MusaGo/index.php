@@ -21,6 +21,59 @@
             </div>
          </div>
       </section>
+      <form class="form-grid" id="modalEdit" enctype="multipart/form-data">
+         <div class="grid">
+            <div class="diseaseName">
+               <label for="nomeDoenca">Nome da Doença:</label>
+               <input type="text" class="input-box" id="nomeDoencaEdit" name="nome_doenca">
+            </div>
+            <div class="scientificName">
+               <label for="nomeCientifico">Nome Científico:</label>
+               <input type="text" class="input-box" id="nomeCientificoEdit" name="nomeCientifico_doenca">
+            </div>
+            <div class="descriptionArea">
+               <label for="descricao">Descrição:</label>
+               <textarea id="descricaoEdit" name="descricao"></textarea>
+            </div>
+            <div class="diseaseControl">
+               <label for="controleDoenca">Controle da Doença:</label>
+               <textarea id="controleDoencaEdit" name="controleDoenca"></textarea>
+            </div>
+            <div class="culturalSolution">
+               <label for="solCultura">Solução Cultural:</label>
+               <textarea id="solCulturaEdit" name="solCultura"></textarea>
+            </div>
+            <div class="chemicalSolution">
+               <label for="solQuimicaEdit">Solução Química:</label>
+               <textarea id="solQuimicaEdit" name="solucaoQuimica_doenca"></textarea>
+            </div>
+            <input type="hidden" name="cod_doenca">
+            <div class="losses">
+               <label for="prejuizos">Prejuízos da Doença:</label>
+               <textarea id="prejuizosEdit" name="prejuizos"></textarea>
+            </div>
+            <div class="fileArea">
+               <label for="imagensDoenca">Carregar imagens:</label>
+               <div>
+                  <div draggable="true" id="divReference" class="upload-single-image-container">
+                     <div id="uploadContainer" class="upload-single-image__upload-file-container">
+                        <input id="fileInputReference" class="upload-single-image-file-input" type="file" name="imagensDoenca[]" multiple="multiple">
+                     </div>
+                  </div>
+                  <button id="removeAll">Remove all Images</button>
+               </div>
+            </div>
+            <div class="submitButton">
+               <button type="button" name="enviarDoenca">Cancelar</button>
+               <button id="submitModalEdit" type="submit" name="enviarDoenca">Enviar</button>
+            </div>
+            <button id="closeModal" style="position:absolute; top: 0; right: 0; border-radius: 50%;">
+               <svg class="icons sm" style="fill: var(--button-text); width: 28px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                  <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+               </svg>
+            </button>
+         </div>
+      </form>
       <form class="form-grid" id="modalForm" enctype="multipart/form-data">
          <div class="grid">
             <div class="diseaseName">
@@ -140,9 +193,7 @@
             data: {
                order: order
             },
-            beforeSend: () => {
-               $("#tbody").empty();
-            },
+
             success: (response) => {
                response.data.map((item) => {
                   $("#tbody").append(`
@@ -179,7 +230,21 @@
                      </td>
                      <td></td>
                      <td>
-                        <button type="button" id="openModal">
+                        <button 
+                           type="button" 
+                           id="openModal"
+                           data_cod="${item.cod_doenca}"
+                           data_nome="${item.nome_doenca}"
+                           data_cientifico="${item.nomeCientifico_doenca}"
+                           data_descricao="${item.descricao_doenca}"
+                           data_controle="${item.controle_doenca}"
+                           data_solucaoQui="${item.solucaoQuimica_doenca}"
+                           data_solucaoCul="${item.solucaoCultura_doenca}"
+                           data_prejuizo="${item.prejuizos_doenca}"
+                           data_risco="${item.titulo_risco}"
+                           data_agente="${item.nome_agente}"
+                           data_Cientifico_agente="${item.nomeCientifico_agente}"
+                        >
                            <svg xmlns="http://www.w3.org/2000/svg" style="fill:black; width: 30px" viewBox="0 0 512 512">
                               <path
                                  d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z" />
@@ -213,7 +278,30 @@
          }
          order = 'ASC';
          fetchTableData(order);
-      })
+      });
+
+      $("#modalEdit").submit((e) => {
+         e.preventDefault();
+         $.ajax({
+            type: "POST",
+            url: '../../src/php/update.php',
+            dataType: 'json',
+            data: new FormData(document.getElementById('modalEdit')),
+            processData: false,
+            contentType: false,
+            cache: false,
+            success: (response) => {
+               if (response.status == 200)
+                  window.location.reload();
+               else
+                  alert(response.message);
+            },
+            error: (err) => {
+               alert('error ' + err.responseText);
+            }
+         });
+
+      });
 
       $("#modalForm").submit((e) => {
          e.preventDefault();
@@ -246,6 +334,24 @@
             display: 'flex',
          });
       })
+
+      $(document).on("click", ".row #openModal", (e) => {
+         e.preventDefault();
+
+         console.log(e.currentTarget.attributes);
+         $("#nomeDoencaEdit").val(e.currentTarget.attributes.data_nome.value);
+         $("#nomeCientificoEdit").val(e.currentTarget.attributes.data_cientifico.value);
+         $("#descricaoEdit").val(e.currentTarget.attributes.data_descricao.value);
+         $("#controleDoencaEdit").val(e.currentTarget.attributes.data_controle.value);
+         $("#solCulturaEdit").val(e.currentTarget.attributes.data_solucaoCul.value);
+         $("#solQuimicaEdit").val(e.currentTarget.attributes.data_solucaoQui.value);
+         $("#nvRiscoEdit").val(e.currentTarget.attributes.data_risco.value);
+         $("#agtCausadorEdit").val(e.currentTarget.attributes.data_agente.value);
+         $("#prejuizosEdit").val(e.currentTarget.attributes.data_prejuizo.value);
+         $("#modalEdit").css({
+            display: 'flex'
+         });
+      });
 
       $("#closeDeleteModal").on("click", (e) => {
          e.preventDefault();
