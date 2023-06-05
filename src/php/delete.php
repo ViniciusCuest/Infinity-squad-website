@@ -39,6 +39,8 @@ if ($img->execute() && $img->rowCount()) {
     $q->bindParam(':new', $cod_doenca);
     if ($q->execute())
         $response['status'] = 200;
+    else 
+        $response['status'] = 500;
 }
 
 echo json_encode($response);

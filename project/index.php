@@ -11,31 +11,38 @@
 </head>
 
 <body class="project-body">
+    <div id="loading">
+        <div></div>
+        <img id="load" style="animation: spinner 3s ease infinite; display: none" src="../src/assets/load-icn.png" alt="">
+        <div></div>
+    </div>
     <main class="project-body-container">
         <div class="prototype-mockup" id="prototype-mockup">
             <img src="../src/assets/Background.png?V=<?php echo time() ?>" class="mockup">
             <img src="../src/assets/splash-screen.png?V=<?php echo time() ?>" class="screenshot" />
         </div>
-        <form action="../src/php/diagnostico.php" method="post" enctype="multipart/form-data">
+        <form enctype="multipart/form-data">
             <div>
-                <div draggable="true" id="divReference" class="upload-single-image-container proj">
+                <div id="divReference" style="opacity: .4" class="upload-single-image-container proj">
                     <div id="uploadContainer" class="upload-single-image__upload-file-container">
-                        <input id="fileInputReference" class="upload-single-image-file-input" type="file" name="img-diagnostico">
+                        <input disabled id="fileInputReference" class="upload-single-image-file-input" type="file" name="img-diagnostico">
                     </div>
                 </div>
                 <button id="removeAll">Remove all Images</button>
             </div>
-            <button type="submit" id="botaoConfirma" name="botao"> Enviar </button>
+            <button type="button" id="submit" name="botao"> Enviar </button>
         </form>
     </main>
     <!--
     <button id="ajax"> Ajax </button>
 -->
 </body>
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"
-    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script type="text/javascript">
     $(document).ready(() => {
+
+        let availableToSend = false;
+
         $("#prototype-mockup").one('click', (e) => {
             e.preventDefault();
             $('.screenshot').remove();
@@ -52,16 +59,32 @@
             e.preventDefault();
             if (e.currentTarget.children['dash-screen']) {
                 $('.screenshot').remove();
+                $("#divReference").removeAttr('style');
+                $("#fileInputReference").prop("disabled", false);
                 $('.prototype-mockup').append('<img src="../src/assets/camera.png" id="camera" class="screenshot" />');
             }
         });
 
-        $('#ajax').click((e) => {
+        $('#fileInputReference').change((e) => {
             e.preventDefault();
+            if (e.currentTarget.files.length)
+                availableToSend = true;
+        });
+
+        $('#submit').click((e) => {
+            e.preventDefault();
+
+            if (!availableToSend) 
+                return;
+
             $.ajax({
                 method: "GET",
                 url: "../src/php/result.php",
                 dataType: 'json',
+                beforeSend: () => {
+                    $("#loading").addClass('loading');
+                    $("#load").css({ display: "block" });
+                },
                 error: ($err) => {
                     alert("Rato" + $err);
                 },

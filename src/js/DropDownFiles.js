@@ -53,6 +53,10 @@ EventTypes.forEach((item) => {
    divContainer.addEventListener(item, (e) => {
       e.preventDefault();
       e.stopPropagation();
+
+      if (e.currentTarget.style[0] == 'opacity')
+         return;
+
       if (item === 'dragenter')
          e.dataTransfer.clearData();
       if (item === 'drop') {

@@ -2,7 +2,7 @@
    --body-bg: #f2f8fe;
    --text: #000;
    --text-gradient: linear-gradient(90deg, #000000d9 0%, rgba(115, 152, 247, 0.907943) 21.07%, rgba(12, 76, 241, 0.84) 85.86%);
-   --header-gradient: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.908) 50.07%, rgba(255, 255, 255, 0.2) 70%);
+   --header-gradient: linear-gradient(180deg, rgb(242, 248, 254) 0%, rgba(242, 248, 254, .6) 50%, rgba(242, 248, 254, 0));
    --input-box: #dddddd;
    --musaGo-mainColor: rgba(5, 140, 117, 0.95);
    --blue: #3b6ff3;
@@ -11,6 +11,7 @@
    --musago: #22bd9e;
    --shadow: 0px 4px 50px 10px rgba(0, 0, 0, 0.2);
    --button-text-hover: #fff;
+   --float-button: #009879;
 }
 
 .dark:root {
@@ -18,7 +19,7 @@
    --light: #4B90D0;
    --text: #fff;
    --text-gradient: linear-gradient(90deg, #ffffff 0%, rgba(115, 152, 247, 0.907943) 21.07%, rgba(12, 76, 241, 0.84) 85.86%);
-   --header-gradient: linear-gradient(180deg, #000 15%, rgba(0, 115, 255, 0.003) 85%, rgba(0, 0, 0, 0) 100%);
+   --header-gradient: linear-gradient(180deg, rgb(0, 0, 0, .99) 0%, rgba(0, 0, 0, .6) 50%, rgba(0,0,0, 0));
    --input-box: #D9D9D9;
    --button-text: #fff;
    --shadow: 0px 4px 50px 10px rgba(0, 0, 0, 0.5);
@@ -151,7 +152,7 @@ TABELA
    border-collapse: collapse;
    margin: 25px 0;
    font-size: 0.9em;
-   width: 80%;
+   width: 90%;
    min-width: 400px;
    border-radius: 5px 5px 0 0;
    overflow: auto;
@@ -160,7 +161,7 @@ TABELA
 }
 
 .content-table thead tr {
-   background-color: #009879;
+   background-color: var(--float-button);
    color: #ffffff;
    text-align: center;
    font-weight: bold;
@@ -181,12 +182,12 @@ TABELA
 }
 
 .content-table tbody tr:last-of-type {
-   border-bottom: 2px solid #009879;
+   border-bottom: 2px solid var(--float-button);
 }
 
 .content-table tbody tr.active-row {
    font-weight: bold;
-   color: #009879;
+   color: var(--float-button);
 }
 
 /**/
@@ -579,10 +580,39 @@ TABELA
 }
 
 .image {
-   margin: 1.5em 0;
-   width: 65%;
+   height: 65%;
+   margin-top: 10%;
+   margin-right: 15%;
    z-index: 5;
    object-fit: contain;
+}
+
+.loading {
+   position: absolute;
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+   top: 0;
+   width: 100vw;
+   height: 100vh;
+   background-color: rgba(0, 0, 0, .8);
+   z-index: 100;
+}
+
+#removeAll {
+   font-size: 1rem;
+   margin-top: 5px;
+   font-weight: 500;
+   cursor: pointer;
+}
+
+.loading > img {
+   width: 15%;
+}
+
+#last-image {
+   margin: 1.5em 0;
 }
 
 .project-content {
@@ -730,7 +760,7 @@ TABELA
    width: 60px;
    height: 60px;
    border-radius: 50%;
-   background-color: #000;
+   background-color: var(--float-button);
    bottom: 0;
    right: 0;
    margin: 30px;

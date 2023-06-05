@@ -11,7 +11,7 @@
       rel="stylesheet">
    <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-   <link rel="stylesheet" href="./src/styles/index.css">
+   <link rel="stylesheet" href="./src/styles/index.css?v=<?php echo time(); ?>">
    <title>Infinity • Landing</title>
 </head>
 
@@ -49,7 +49,7 @@
                galley of type and scrambled it to make a type specimen book</p>
          </section>
 
-         <img class="image" src="./src/assets/iphone.png" alt="image">
+         <img class="image" src="./src/assets/main-cover.png" alt="image">
       </section>
       <span class="light"></span>
    </main>

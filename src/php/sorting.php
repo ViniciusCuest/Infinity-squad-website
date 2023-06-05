@@ -45,3 +45,4 @@ function merge($left, $right, $order) {
 
     return $result;
 }
+?>
