@@ -11,10 +11,18 @@
 </head>
 
 <body class="project-body">
-    <div id="loading">
-        <div></div>
+    <div id="loading" style="display: none; padding: 0 5vw">
+        <div style="
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(4, 1fr);
+            grid-column-gap: 10px;
+            grid-row-gap: 10px;
+            width: 400px;
+            height: 75vh
+        " id="db-img"></div>
         <img id="load" style="animation: spinner 3s ease infinite; display: none" src="../src/assets/load-icn.png" alt="">
-        <div></div>
+        <div id="user-img"></div>
     </div>
     <main class="project-body-container">
         <div class="prototype-mockup" id="prototype-mockup">
@@ -25,12 +33,12 @@
             <div>
                 <div id="divReference" style="opacity: .4" class="upload-single-image-container proj">
                     <div id="uploadContainer" class="upload-single-image__upload-file-container">
-                        <input disabled id="fileInputReference" class="upload-single-image-file-input" type="file" name="img-diagnostico">
+                        <input disabled id="fileInputReference" class="upload-single-image-file-input" type="file" name="img-diagnostico" accept="image/*">
                     </div>
                 </div>
-                <button id="removeAll">Remove all Images</button>
+                <button id="removeAll"> Limpar Imagens</button>
             </div>
-            <button type="button" id="submit" name="botao"> Enviar </button>
+            <button type="button" style="width: 50%; margin-top: 20px; height: 40px; border-radius: 8px; background-color: #fff; font-weight: 800; " id="submit" name="botao"> Enviar </button>
         </form>
     </main>
 </body>
@@ -67,35 +75,59 @@
             if (e.currentTarget.files.length)
                 availableToSend = true;
         });
+        $("#fileInputReference").change((e) => {
+            e.preventDefault();
+            if (e.currentTarget.files.length) {
+                const reader = new FileReader();
+                reader.readAsDataURL(e.currentTarget.files[0]);
+                reader.onload = () => {
+                    $("#user-img").append(`<img style="width: 10vw" src="${reader.result}"/>`);
+                }
+            }
+        });
 
         $('#submit').click((e) => {
             e.preventDefault();
-
             if (!availableToSend)
                 return;
 
             $.ajax({
-                type: "POST",
-                data: {},
-                dataType: 'json',
-            })
-
-            $.ajax({
-                method: "GET",
+                type: "GET",
                 url: "../src/php/result.php",
                 dataType: 'json',
                 beforeSend: () => {
                     $("#loading").addClass('loading');
+                    $("#loading").css({
+                        display: "flex"
+                    });
                     $("#load").css({
                         display: "block"
                     });
                 },
-                error: ($err) => {
-
+                error: (err) => {
+                    console.log(err.responseText);
                 },
-
                 success: (response) => {
-
+                    response.data.map((item, index) => {
+                        setTimeout(() => {
+                            $("#db-img").append(`<img style="width: 100%" src="../src/img` + item.link_imagem.substring(6) + `"/>`);
+                        }, 800 * index);
+                    });
+                    setTimeout(() => {
+                        $('.screenshot').remove();
+                        $('.prototype-mockup').append('<img src="../src/assets/diagnostico.png" style="margin-top: 29px" class="screenshot" />');
+                        $("#loading").removeClass('loading');
+                        $("#loading").css({
+                            display: "none"
+                        });
+                        $("#load").css({
+                            display: "none"
+                        });
+                        setTimeout(() => {
+                            $("#user-img").empty();
+                            $("#db-img").empty();
+                        }, 1000);
+                    }, 3000);
                 }
             });
         });

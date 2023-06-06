@@ -121,10 +121,6 @@ insert into nivel_risco values (1, 'Baixo'), (2, 'Médio'), (3, 'Grave');
 
 insert into agente_causador values (1, 'Fungo', 'Fungus'), (2, 'Bactéria', 'Bacterus'), (3, 'Vírus', 'Vairus');
 
-insert into doenca values (0, 'Sigatoka Negra', 'Elias Claudio', 'Doença altamente contaminável', 'Não possui controle', 'Sem solução química', 1, 2, 'Sem solução cultural', 'Danos cerebrais');
-
-insert into imagem_doenca(link_imagem, cod_doenca) values ('./sigatoka.png', 1);
-insert into imagem_doenca(link_imagem, cod_doenca) values ('./sigatoka_elias.png', 1);
 
 #select * from doenca;
 #select * from imagem_doenca;
