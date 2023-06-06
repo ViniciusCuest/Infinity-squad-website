@@ -53,18 +53,18 @@
                <textarea id="prejuizosEdit" name="prejuizos_doenca"></textarea>
             </div>
             <div class="fileArea">
-               <label for="imagensDoenca">Carregar imagens:</label>
+               <label for="fileInputReference">Carregar imagens:</label>
                <div>
                   <div draggable="true" id="divReference" class="upload-single-image-container">
                      <div id="uploadContainer" class="upload-single-image__upload-file-container">
-                        <input id="fileInputReference" class="upload-single-image-file-input" type="file" name="imagensAdicionar[]" multiple="multiple">
+                        <input id="fileInputReference" class="upload-single-image-file-input" type="file" name="imagensAdicionar[]" accept="image/*" multiple="multiple">
                      </div>
                   </div>
-                  <button id="removeAll">Remove all Images</button>
+                  <button id="removeAll">Limpar Imagens</button>
                </div>
             </div>
             <div class="submitButton">
-               <button type="button" name="enviarDoenca">Cancelar</button>
+               <button type="button"  id="closeModal" name="enviarDoenca">Cancelar</button>
                <button id="submitModalEdit" type="submit" name="enviarDoenca">Enviar</button>
             </div>
             <button id="closeModal" type="button" style="position:absolute; top: 0; right: 0; border-radius: 50%;">
@@ -118,18 +118,18 @@
                <textarea id="prejuizos" name="prejuizos"></textarea>
             </div>
             <div class="fileArea">
-               <label for="imagensDoenca">Carregar imagens:</label>
+               <label for="fileInputReference2">Carregar imagens:</label>
                <div>
-                  <div draggable="true" id="divReference" class="upload-single-image-container">
-                     <div id="uploadContainer" class="upload-single-image__upload-file-container">
-                        <input id="fileInputReference" class="upload-single-image-file-input" type="file" name="imagensDoenca[]" multiple="multiple">
+                  <div draggable="true" id="divReference2" class="upload-single-image-container">
+                     <div id="uploadContainer2" class="upload-single-image__upload-file-container">
+                        <input id="fileInputReference2" class="upload-single-image-file-input" type="file" name="imagensDoenca[]" accept="image/*" multiple="multiple">
                      </div>
                   </div>
-                  <button id="removeAll">Remove all Images</button>
+                  <button id="removeAll">Limpar Imagens</button>
                </div>
             </div>
             <div class="submitButton">
-               <button type="" name="enviarDoenca">Cancelar</button>
+               <button type="" id="closeModal" name="cancelarDoenca">Cancelar</button>
                <button id="submitModal" type="submit" name="enviarDoenca">Enviar</button>
             </div>
             <button id="closeModal" style="position:absolute; top: 0; right: 0; border-radius: 50%;">
@@ -406,5 +406,81 @@
    });
 </script>
 <script src="../../src/js/DropDownFiles.js?j=<?php echo time(); ?>"></script>
+<script type="text/javascript">
+const divContainer2 = document.getElementById('divReference2');
+const fileContainer2 = document.getElementById('fileInputReference2');
+const uploadContainer2 = document.getElementById("uploadContainer2");
 
+const EventTypes2 = ['dragenter', 'dragleave', 'dragover', 'drop'];
+
+let imagePath2 = [];
+
+$("#uploadContainer2").append('<h1 id="file-text2">Insira suas imagens aqui</h1>');
+
+const getFileInformation2 = (file) => {
+   const reader2 = new FileReader();
+   reader2.readAsDataURL(file);
+   reader2.onload = () => {
+      $("#img-click2").remove();
+      $("#file-text2").remove();
+      imagePath2.push(reader2.result);
+      imagePath2.map(item => {
+         $("#uploadContainer2").append("<img id='img-click2' class='img-click' height='40%' src='" + item + "'/>");
+      });
+   }
+}
+
+$("#removeAll").click((e) => {
+   e.preventDefault();
+
+   if(imagePath2.length) 
+      $("#uploadContainer2").append('<h1 id="file-text2">Insira suas imagens aqui</h1>');
+
+   imagePath2 = [];
+   $("#img-click2").remove();
+});
+
+const validateFileRequirements2 = (file) => {
+   const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+   if (sizeInMB > 5)
+      return;
+
+   getFileInformation2(file);
+}
+
+fileContainer2.addEventListener("change", (e) => {
+   if (e.currentTarget.files.length)
+      for (let i = 0; i < e.currentTarget.files.length; i++)
+         validateFileRequirements(e.currentTarget.files[i]);
+});
+
+divContainer2.addEventListener("click", (e) => {
+   fileContainer2.click();
+});
+
+EventTypes2.forEach((item) => {
+   divContainer2.addEventListener(item, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      if (e.currentTarget.style[0] == 'opacity')
+         return;
+
+      if (item === 'dragenter')
+         e.dataTransfer.clearData();
+      if (item === 'drop') {
+         const files = e.dataTransfer.files;
+         if (files.length)
+            validateFileRequirements2(files[0]);
+      }
+   });
+});
+
+EventTypes2.forEach((item) => {
+   divContainer2.removeEventListener(item, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+   });
+});
+</script>
 </html>
