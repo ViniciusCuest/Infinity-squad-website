@@ -10,6 +10,7 @@
    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
    <link rel="stylesheet" href="./src/styles/index.css?v=<?php echo time(); ?>">
+   <link rel="icon" href="./src/assets/infinity.png?v=<?php echo time(); ?>">
    <title>Infinity • Landing</title>
 </head>
 

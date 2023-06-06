@@ -37,7 +37,7 @@
                 </div>
                 <button id="removeAll"> Limpar Imagens</button>
             </div>
-            <button type="button" style="width: 50%; margin-top: 20px; height: 40px; border-radius: 8px; background-color: #fff; font-weight: 800; " id="submit" name="botao"> Enviar </button>
+            <button type="button" style="cursor: pointer; width: 50%; margin-top: 20px; height: 40px; border-radius: 8px; background-color: #fff; font-weight: 800; " id="submit" name="botao"> Enviar </button>
         </form>
     </main>
 </body>
