@@ -20,28 +20,26 @@
             grid-row-gap: 10px;
             width: 400px;
             height: 75vh" id="db-img"></div>
-        <div id="loading" style="display: none">
-            <div id="db-img"></div>
-            <img id="load" style="animation: spinner 3s ease infinite; display: none" src="../src/assets/load-icn.png" alt="">
-            <div id="user-img"></div>
+        <img id="load" style="animation: spinner 3s ease infinite; display: none" src="../src/assets/load-icn.png" alt="">
+        <div id="user-img"></div>
+    </div>
+    <main class="project-body-container">
+        <div class="prototype-mockup" id="prototype-mockup">
+            <img src="../src/assets/Background.png?V=<?php echo time() ?>" class="mockup">
+            <img src="../src/assets/splash-screen.png?V=<?php echo time() ?>" class="screenshot" />
         </div>
-        <main class="project-body-container">
-            <div class="prototype-mockup" id="prototype-mockup">
-                <img src="../src/assets/Background.png?V=<?php echo time() ?>" class="mockup">
-                <img src="../src/assets/splash-screen.png?V=<?php echo time() ?>" class="screenshot" />
-            </div>
-            <form enctype="multipart/form-data">
-                <div>
-                    <div id="divReference" style="opacity: .4" class="upload-single-image-container proj">
-                        <div id="uploadContainer" class="upload-single-image__upload-file-container">
-                            <input disabled id="fileInputReference" class="upload-single-image-file-input" type="file" name="img-diagnostico" accept="image/*">
-                        </div>
+        <form enctype="multipart/form-data">
+            <div>
+                <div id="divReference" style="opacity: .4" class="upload-single-image-container proj">
+                    <div id="uploadContainer" class="upload-single-image__upload-file-container">
+                        <input disabled id="fileInputReference" class="upload-single-image-file-input" type="file" name="img-diagnostico" accept="image/*">
                     </div>
-                    <button id="removeAll"> Limpar Imagens</button>
                 </div>
-                <button type="button" style="width: 50%; margin-top: 20px; height: 40px; border-radius: 8px; background-color: #fff; font-weight: 800; " id="submit" name="botao"> Enviar </button>
-            </form>
-        </main>
+                <button id="removeAll"> Limpar Imagens</button>
+            </div>
+            <button type="button" style="width: 50%; margin-top: 20px; height: 40px; border-radius: 8px; background-color: #fff; font-weight: 800; " id="submit" name="botao"> Enviar </button>
+        </form>
+    </main>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 <script type="text/javascript">
@@ -111,16 +109,10 @@
                 success: (response) => {
                     response.data.map((item, index) => {
                         setTimeout(() => {
-                            $("#db-img").append(`<img style="width: 100%" src="../src/img` + item.link_imagem.substring(6) + `"/>`);
+                            $("#db-img").append(`<img style="width: 100%" src="../src/img/${item.link_imagem}"/>`);
                         }, 800 * index);
                     });
                     setTimeout(() => {
-                        $('.screenshot').remove();
-                        $('.prototype-mockup').append('<img src="../src/assets/diagnostico.png" style="margin-top: 29px" class="screenshot" />');
-                        console.log(response);
-                        let imagem = (response.data.link_imagem.substring(6));
-                        console.log(imagem);
-                        $("#db-img").append(`<img width="15%" src="../src/img` + imagem + `"/>`);
                         setTimeout(() => {
                             $("#loading").removeClass('loading');
                             $("#loading").css({
@@ -129,12 +121,11 @@
                             $("#load").css({
                                 display: "none"
                             });
-                            setTimeout(() => {
-                                $("#user-img").empty();
-                                $("#db-img").empty();
-                            }, 1000);
-                        }, 3000);
-                        $('.prototype-mockup').append('<img src="../src/assets/diagnostico.png" id="camera" class="screenshot" />');
+                            $("#user-img").empty();
+                            $("#db-img").empty();
+                        }, 2200);
+                        $('.screenshot').remove();
+                        $('.prototype-mockup').append('<img src="../src/assets/diagnostico.png" style="margin-top: 29px" id="camera" class="screenshot" />');
                     }, 2800);
 
                 }

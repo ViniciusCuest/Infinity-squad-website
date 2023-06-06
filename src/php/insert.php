@@ -31,12 +31,19 @@ if ($con->execute($array_pdo)) {
 
     for ($i = 0; $i < $total_count; $i++) {
         $tmpFilePath = $_FILES['imagensDoenca']['tmp_name'][$i];
+
+        $ext = pathinfo($_FILES['imagensDoenca']['name'][$i], PATHINFO_EXTENSION);
+        $fileName = (rand(1,99999) * $_FILES['imagensDoenca']['size'][$i]) * rand(1,999);
+
         if ($tmpFilePath != "") {
-            $newFilePath = "../img/" . $_FILES['imagensDoenca']['name'][$i];
+
+            $completeFile = $fileName.".".$ext;
+
+            $newFilePath = "../img/".$completeFile;
             //File is uploaded to temp dir
             if (move_uploaded_file($tmpFilePath, $newFilePath)) {
                 $con = $pdo->prepare("Insert into imagem_doenca(link_imagem, cod_doenca) values (?, ?)");
-                $con->bindParam(1, $newFilePath);
+                $con->bindParam(1, $completeFile);
                 $con->bindParam(2, $cod_disease);
                 if ($con->execute())
                     $response['status'] = 200;

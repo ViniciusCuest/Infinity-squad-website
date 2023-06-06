@@ -60,7 +60,7 @@
                         <input id="fileInputReference" class="upload-single-image-file-input" type="file" name="imagensAdicionar[]" accept="image/*" multiple="multiple">
                      </div>
                   </div>
-                  <button id="removeAll">Limpar Imagens</button>
+                  <button id="removeAll2">Limpar Imagens</button>
                </div>
             </div>
             <div class="submitButton">
@@ -430,7 +430,7 @@ const getFileInformation2 = (file) => {
    }
 }
 
-$("#removeAll").click((e) => {
+$("#removeAll2").click((e) => {
    e.preventDefault();
 
    if(imagePath2.length) 
@@ -451,7 +451,7 @@ const validateFileRequirements2 = (file) => {
 fileContainer2.addEventListener("change", (e) => {
    if (e.currentTarget.files.length)
       for (let i = 0; i < e.currentTarget.files.length; i++)
-         validateFileRequirements(e.currentTarget.files[i]);
+         validateFileRequirements2(e.currentTarget.files[i]);
 });
 
 divContainer2.addEventListener("click", (e) => {
