@@ -22,16 +22,16 @@
          <nav class="navigation">
             <ul id="list" class="list-navigator">
                <li id="0" class="active" onclick="changeIndex(event);">
-                  Home
+                  Início
                </li>
                <li id="1" class="" onclick="changeIndex(event);">
-                  Projects
+                  Projetos
                </li>
                <li id="2" class="" onclick="changeIndex(event);">
-                  Squad
+                  Equipe
                </li>
                <li id="3" class="" onclick="changeIndex(event);">
-                  Contact Us
+                  Contate-nos
                </li>
             </ul>
             <button id="mode" class="switch-theme">
@@ -40,8 +40,8 @@
       </header>
       <section class="content">
          <section id="cover-info">
-            <h1 class="heading">Each challenge has a
-               <span class="heading-gradient"><br id="web">new solution<span>
+            <h1 class="heading">Todo desafio há uma
+               <span class="heading-gradient"><br id="web">nova solução<span>
             </h1>
             <p class="description">Na Infinity, valorizamos a qualidade e a eficiência. Buscamos constantemente maneiras de otimizar nossos processos e garantir que entregamos soluções excepcionais dentro dos prazos estabelecidos. Nosso objetivo é, não apenas atender às suas expectativas, mas superá-las.</p>
          </section>
@@ -54,14 +54,14 @@
    <main class="wrapper">
       <section class="content">
          <section>
-            <h1 class="heading lg">Description Projects</h1>
+            <h1 class="heading lg">Descrição do Atual Projeto</h1>
             <p class="description">
                O musaGo é um aplicativo inovador desenvolvido para auxiliar na detecção de doenças nas folhas das bananeiras por meio da análise de imagens. Projetado para ser de fácil utilização, ele visa fornecer aos agricultores e especialistas em cultivo de bananas uma ferramenta conveniente e precisa para identificar problemas de saúde nas plantas.</p>
          </section>
          <div class="project-content">
             <img class="image" id="last-image" src="./src/assets/prototype-mockup.png" alt="image" />
             <button type="button" onclick="window.location.href = './project/';" class="read-more">
-               <h4>Read more</h4>
+               <h4>Saiba mais</h4>
             </button>
          </div>
       </section>
@@ -71,7 +71,7 @@
    <main class="wrapper">
       <section class="content">
          <section id="squad-area">
-            <h1 class="heading lg">Squad</h1>
+            <h1 class="heading lg">Equipe</h1>
             <p class="description"></p>
             <section class="squad-container">
                <div class="squad-content">
@@ -121,7 +121,7 @@
    <main class="wrapper">
       <section class="content" id="form-area">
          <section>
-            <h1 class="heading lg">Contact us</h1>
+            <h1 class="heading lg">Contate-nos</h1>
             <p class="description" style="padding-right: 20%">Entre em contato conosco por meio deste formulário ou acesse nossas redes sociais abaixo</p>
          </section>
          <form class="form">

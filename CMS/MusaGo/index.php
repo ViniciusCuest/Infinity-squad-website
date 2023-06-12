@@ -64,7 +64,7 @@
                </div>
             </div>
             <div class="submitButton">
-               <button type="button"  id="closeModal" name="enviarDoenca">Cancelar</button>
+               <button type="button" id="closeModal" name="enviarDoenca">Cancelar</button>
                <button id="submitModalEdit" type="submit" name="enviarDoenca">Enviar</button>
             </div>
             <button id="closeModal" type="button" style="position:absolute; top: 0; right: 0; border-radius: 50%;">
@@ -193,7 +193,9 @@
             data: {
                order: order
             },
-
+            beforeSend: () => {
+               $("#tbody").empty();
+            },
             success: (response) => {
                response.data.map((item) => {
                   $("#tbody").append(`
@@ -407,80 +409,81 @@
 </script>
 <script src="../../src/js/DropDownFiles.js?j=<?php echo time(); ?>"></script>
 <script type="text/javascript">
-const divContainer2 = document.getElementById('divReference2');
-const fileContainer2 = document.getElementById('fileInputReference2');
-const uploadContainer2 = document.getElementById("uploadContainer2");
+   const divContainer2 = document.getElementById('divReference2');
+   const fileContainer2 = document.getElementById('fileInputReference2');
+   const uploadContainer2 = document.getElementById("uploadContainer2");
 
-const EventTypes2 = ['dragenter', 'dragleave', 'dragover', 'drop'];
+   const EventTypes2 = ['dragenter', 'dragleave', 'dragover', 'drop'];
 
-let imagePath2 = [];
+   let imagePath2 = [];
 
-$("#uploadContainer2").append('<h1 id="file-text2">Insira suas imagens aqui</h1>');
+   $("#uploadContainer2").append('<h1 id="file-text2">Insira suas imagens aqui</h1>');
 
-const getFileInformation2 = (file) => {
-   const reader2 = new FileReader();
-   reader2.readAsDataURL(file);
-   reader2.onload = () => {
-      $("#img-click2").remove();
-      $("#file-text2").remove();
-      imagePath2.push(reader2.result);
-      imagePath2.map(item => {
-         $("#uploadContainer2").append("<img id='img-click2' class='img-click' height='40%' src='" + item + "'/>");
-      });
+   const getFileInformation2 = (file) => {
+      const reader2 = new FileReader();
+      reader2.readAsDataURL(file);
+      reader2.onload = () => {
+         $("#img-click2").remove();
+         $("#file-text2").remove();
+         imagePath2.push(reader2.result);
+         imagePath2.map(item => {
+            $("#uploadContainer2").append("<img id='img-click2' class='img-click' height='40%' src='" + item + "'/>");
+         });
+      }
    }
-}
 
-$("#removeAll2").click((e) => {
-   e.preventDefault();
-
-   if(imagePath2.length) 
-      $("#uploadContainer2").append('<h1 id="file-text2">Insira suas imagens aqui</h1>');
-
-   imagePath2 = [];
-   $("#img-click2").remove();
-});
-
-const validateFileRequirements2 = (file) => {
-   const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
-   if (sizeInMB > 5)
-      return;
-
-   getFileInformation2(file);
-}
-
-fileContainer2.addEventListener("change", (e) => {
-   if (e.currentTarget.files.length)
-      for (let i = 0; i < e.currentTarget.files.length; i++)
-         validateFileRequirements2(e.currentTarget.files[i]);
-});
-
-divContainer2.addEventListener("click", (e) => {
-   fileContainer2.click();
-});
-
-EventTypes2.forEach((item) => {
-   divContainer2.addEventListener(item, (e) => {
+   $("#removeAll2").click((e) => {
       e.preventDefault();
-      e.stopPropagation();
 
-      if (e.currentTarget.style[0] == 'opacity')
+      if (imagePath2.length)
+         $("#uploadContainer2").append('<h1 id="file-text2">Insira suas imagens aqui</h1>');
+
+      imagePath2 = [];
+      $("#img-click2").remove();
+   });
+
+   const validateFileRequirements2 = (file) => {
+      const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+      if (sizeInMB > 5)
          return;
 
-      if (item === 'dragenter')
-         e.dataTransfer.clearData();
-      if (item === 'drop') {
-         const files = e.dataTransfer.files;
-         if (files.length)
-            validateFileRequirements2(files[0]);
-      }
-   });
-});
+      getFileInformation2(file);
+   }
 
-EventTypes2.forEach((item) => {
-   divContainer2.removeEventListener(item, (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+   fileContainer2.addEventListener("change", (e) => {
+      if (e.currentTarget.files.length)
+         for (let i = 0; i < e.currentTarget.files.length; i++)
+            validateFileRequirements2(e.currentTarget.files[i]);
    });
-});
+
+   divContainer2.addEventListener("click", (e) => {
+      fileContainer2.click();
+   });
+
+   EventTypes2.forEach((item) => {
+      divContainer2.addEventListener(item, (e) => {
+         e.preventDefault();
+         e.stopPropagation();
+
+         if (e.currentTarget.style[0] == 'opacity')
+            return;
+
+         if (item === 'dragenter')
+            e.dataTransfer.clearData();
+         if (item === 'drop') {
+            const files = e.dataTransfer.files;
+            if (files.length)
+               validateFileRequirements2(files[0]);
+         }
+      });
+   });
+
+   EventTypes2.forEach((item) => {
+      divContainer2.removeEventListener(item, (e) => {
+         e.preventDefault();
+         e.stopPropagation();
+      });
+   });
 </script>
+
 </html>
